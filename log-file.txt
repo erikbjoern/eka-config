@@ -1,0 +1,70 @@
+
+Sat Sep  3 10:49:12 CEST 2022
+ .bash_profile     |   89 +++++
+ .gitconfig        |   25 ++
+ Default.bttpreset | 1156 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 1270 insertions(+)
+
+Sat Sep  3 12:02:52 CEST 2022
+ .bash_profile | 70 +++++++++++++++++++++++++++++++++++++++++++----------------
+ .gitconfig    |  1 +
+ 2 files changed, 52 insertions(+), 19 deletions(-)
+
+Sat Sep  3 12:04:17 CEST 2022
+ .bash_profile | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+Sat Sep  3 12:11:35 CEST 2022
+ .bash_profile | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+Sat Sep  3 12:16:04 CEST 2022
+ .bash_profile | 4 +++-
+ .gitignore    | 1 +
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+Sat Sep  3 12:23:27 CEST 2022
+ .bash_profile | 59 +++++++++++++++++++++++++++++++++++++++--------------------
+ 1 file changed, 39 insertions(+), 20 deletions(-)
+
+Sat Sep  3 12:23:27 CEST 2022
+
+Sat Sep  3 12:30:37 CEST 2022
+ .bash_profile | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
+
+Sat Sep  3 12:33:22 CEST 2022
+ .bash_profile | 21 ++++++++++++++-------
+ 1 file changed, 14 insertions(+), 7 deletions(-)
+
+Sat Sep  3 12:36:58 CEST 2022
+ .bash_profile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Sat Sep  3 15:06:12 CEST 2022
+ .bash_profile                   | 31 +++++++++----------------------
+ eka-helpers/set-local-config.sh | 18 ++++++++++++++++++
+ package.json                    | 13 +++++++++++++
+ 3 files changed, 40 insertions(+), 22 deletions(-)
+
+Sat Sep  3 15:37:29 CEST 2022
+ .bash_profile                   | 17 ++++++++++++++++-
+ eka-helpers/set-local-config.sh | 10 ----------
+ init-config.sh                  | 17 +++++++++++++++++
+ package.json                    |  2 +-
+ readme.md                       |  8 ++++++++
+ 5 files changed, 42 insertions(+), 12 deletions(-)
+
+Sat Sep  3 17:06:34 CEST 2022
+ .bash_profile    | 34 ++++++++++++++++++++++++++++------
+ .git-credentials |  5 +++++
+ .gitignore       |  4 ++++
+ 3 files changed, 37 insertions(+), 6 deletions(-)
+
+Sat Sep  3 18:22:50 CEST 2022
+ .bash_profile                       |  4 ++--
+ .gitconfig                          | 26 --------------------------
+ eka-helpers/set-local-config.sh     |  2 ++
+ previous-local-config/.bash_profile | 34 ++++++++++++++++++++++++++++------
+ previous-local-config/.gitconfig    |  5 -----
+ 5 files changed, 32 insertions(+), 39 deletions(-)
