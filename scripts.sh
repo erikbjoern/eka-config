@@ -222,7 +222,12 @@ display_help () {
   done
 }
 
-arguments="$@"
+arguments=()
+
+for arg in "$@"; do
+  arguments+=("$arg")
+done
+
 number_of_arguments="$#"
 highest_accepted_argument=0
 
