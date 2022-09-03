@@ -268,6 +268,9 @@ else
     fi
   done
 
+  echo $highest_accepted_argument
+  echo $#
+
   if [[ $highest_accepted_argument == 0 ]]; then
     # if no action was invoked, check if help was requested
     help_flags=("-h" "--help" "help")
