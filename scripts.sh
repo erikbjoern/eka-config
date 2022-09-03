@@ -55,7 +55,7 @@ set_local_config () {
 }
 
 sync_config_from_home_into_repo () {
-  echo "Copying local config into repo at '$HOME/eka-config/"
+  echo "Copying local config into repo at $HOME/eka-config/"
 
   get_local_config
   store_git_credentials
