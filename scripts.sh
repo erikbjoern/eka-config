@@ -33,7 +33,7 @@ log_and_push () {
   git add .
   echo "Committing: $commitmessage"
   git commit -m "$commitmessage"
-  git push --set-upstream origin $(git_current_branch)
+  git push -q --set-upstream origin $(git_current_branch)
 }
 
 get_local_config () {
@@ -248,6 +248,8 @@ echo ""
 if [[ $# == 0 ]]; then
   echo "Are you lost? Flag with '-h' or something, if you want help"
 elif [[ $1 == "init" ]]; then
+  display_word_mark
+  echo ""
   echo "Initialising eka-config"
 
   set_local_config
