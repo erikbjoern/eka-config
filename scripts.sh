@@ -85,7 +85,7 @@ pull_eka_config () {
   # if any changes on remote, pull them
   if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
     echo "Pulling eka-config from github"
-    git pullt
+    git pull
   else
     echo "No changes on remote"
   fi
