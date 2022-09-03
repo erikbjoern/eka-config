@@ -137,19 +137,22 @@ sync () {
 
 push () {
   if [[ "$2" == "sync" ]]; then
+    highest_accepted_argument=3
     sync_config_from_home_into_repo
     push_eka_config $arg3
-    highest_accepted_argument=3
-  elif [[ $# == 1 ]]; then
+  elif [[ $# == 2 ]]; then
+    highest_accepted_argument=2
     push_eka_config $arg2
+  elif [[ $# == 1 ]]; then
+    push_eka_config
   fi
 }
 
 pull () {
   if [[ "$2" == "sync" ]]; then
+    highest_accepted_argument=2
     pull_eka_config
     set_local_config
-    highest_accepted_argument=2
   elif [[ $# == 1 ]]; then
     pull_eka_config
   fi
@@ -214,17 +217,17 @@ options=()
 labels+=("log")
 descriptions+=("Create a new entry in the log")
 actions+=(log)
-options+=("'<commit message>'")
+options+=("'<message>'")
 
 labels+=("sync")
 descriptions+=("Sync local config into repo (will extract sensitive data into .git-credentials)")
 actions+=(sync)
-options+=("'up', 'down', 'push <commit message>', 'pull'")
+options+=("'up', 'down', 'push <message>', 'pull'")
 
 labels+=("push")
 descriptions+=("Create log entry etc, then push changes to GitHub")
 actions+=(push)
-options+=("'sync'")
+options+=("'<message>', 'sync'")
 
 labels+=("pull")
 descriptions+=("Pull changes from GitHub")
