@@ -280,7 +280,7 @@ else
     else
       display_help verbose
     fi
-  elif [[ $# < $highest_accepted_argument ]]; then
+  elif [[ $highest_accepted_argument < $# ]]; then
     display_help verbose
   fi
 fi
