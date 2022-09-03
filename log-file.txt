@@ -87,3 +87,7 @@ Sat Sep  3 19:28:59 CEST 2022
  data/Default.bttpreset          | 1156 +++++++++++++++++++++++++++++++++++++++
  eka-helpers/set-local-config.sh |    5 +-
  4 files changed, 1367 insertions(+), 3 deletions(-)
+
+Sat Sep  3 19:31:31 CEST 2022
+ .gitignore | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)

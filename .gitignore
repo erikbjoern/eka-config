@@ -2,4 +2,4 @@
 previous-local-config/
 
 # extracted git user config
-.git-credentials
+**/.git-credentials
