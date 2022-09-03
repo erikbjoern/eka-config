@@ -14,7 +14,7 @@ create_log_entry () {
     echo $logmessage >> log-file.txt
     git add -N .
     echo "Creating git log (log-file.txt):"
-    echo $(git diff --stat -- ':!log-file.txt' ':!.obsidian')
+    echo "$(git diff --stat -- ':!log-file.txt' ':!.obsidian')"
     git diff --stat -- ':!log-file.txt' ':!.obsidian' >> log-file.txt
   else 
     echo "No changes to commit"
@@ -31,7 +31,6 @@ log_and_push () {
   create_log_entry $commitmessage
 
   git add .
-  echo "Committing: $commitmessage"
   git commit -m "$commitmessage"
   git push -q --set-upstream origin $(git_current_branch)
 }
@@ -112,7 +111,7 @@ store_git_credentials () {
 }
 
 log () {
-  if [ $# <= 2 ]; then
+  if [[ $# < 3 ]]; then
     highest_accepted_argument=2
     create_log_entry $arg2
   fi
@@ -254,11 +253,15 @@ elif [[ $1 == "init" ]]; then
   echo "Initialising eka-config"
 
   set_local_config
-  cp -rf $PWD/previous-local-config $HOME/original-local-config
+
+  config_backup_directory=$HOME/original-local-config/$(date -I seconds)
+
+  mkdir -p $config_backup_directory
+  cp -rf $PWD/previous-local-config $config_backup_directory
   source $HOME/.bash_profile
 
   echo "eka-config initialised and sourced"
-  echo "Your original config has been moved to $HOME/original-local-config"
+  echo "Your original config has been moved to $config_backup_directory"
 else 
   for (( i=0; i<${#labels[@]}; i++ )); do
     #if argument matches label, invoke action at the same index
@@ -267,9 +270,6 @@ else
       ${actions[$i]} $arg1 $arg2 $arg3 $arg4
     fi
   done
-
-  echo $highest_accepted_argument
-  echo $#
 
   if [[ $highest_accepted_argument == 0 ]]; then
     # if no action was invoked, check if help was requested
