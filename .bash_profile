@@ -6,8 +6,8 @@ fi
 
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+if [ -f $HOME/.git-completion.bash ]; then
+  . $HOME/.git-completion.bash
 fi
 
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
@@ -21,9 +21,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # git aliases
-alias edit-bash="code ~/.bash_profile"
-alias source-bash="source ~/.bash_profile"
-alias edit-git="code ~/.gitconfig"
+alias edit-bash="code $HOME/.bash_profile"
+alias source-bash="source $HOME/.bash_profile"
+alias edit-git="code $HOME/.gitconfig"
 alias diff="git diff > git.diff && code -r git.diff --wait && rm git.diff"
 alias stash-u="git ci -m 'WIP' && git stash -u -m 'stash-unstaged' && git undo"
 alias stash-s="stash-u && git stash -m 'stash-staged' && git stash pop stash@{1}"
@@ -65,7 +65,7 @@ confirm () {
 
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
 
 git_current_branch () {
 	cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
@@ -75,7 +75,6 @@ create_git_log () {
   echo "..."
   if [[ -n $(git status -s) ]]; 
     then
-      touch log-file.txt
       echo "" >> log-file.txt
       date >> log-file.txt
       git add -N .
@@ -106,7 +105,7 @@ auto_push () {
 
 set_local_config () {
   echo "..."
-  echo "Copying config from '~/eka-config/ to ~/"
+  echo "Copying config from '$HOME/eka-config/ to $HOME/"
 
   . ./eka-helpers/set-local-config.sh
 
@@ -121,16 +120,15 @@ set_local_config () {
 
 get_local_config () {
   echo "..."
-  echo "Copying local config into '~/eka-config/"
+  echo "Copying local config into '$HOME/eka-config/"
 
-  cp -f ~/.gitconfig ~/eka-config/
-  cp -f ~/.bash_profile ~/eka-config/
-  cp -rf ~/eka-helpers ~/eka-config/
+  cp -f $HOME/.gitconfig $HOME/eka-config/
+  cp -f $HOME/.bash_profile $HOME/eka-config/
+  cp -rf $HOME/eka-helpers $HOME/eka-config/
 }
 
 
 sync_eka_config_into_repo () {
-  cd ~/eka-config/
   get_local_config
 
   store_git_credentials
@@ -148,7 +146,7 @@ push_eka_config () {
 }
 
 pull_eka_config () {
-  cd ~/eka-config/
+  cd $HOME/eka-config/
   echo "..."
 
   # if any changes on remote, pull them
@@ -175,5 +173,9 @@ store_git_credentials () {
   echo "..."
   echo "Deleting git credentials from $PWD/.gitconfig"
 
-  sed '/\[user\]/,/\[/{/\[[^u]/!d;}' $PWD/.gitconfig > $PWD/.gitconfig
+  tempfile="$(date -I seconds).txt"
+
+  sed '/\[user\]/,/\[/{/\[[^u]/!d;}' $PWD/.gitconfig > $tempfile
+  cat $tempfile > $PWD/.gitconfig
+  rm $tempfile
 }
