@@ -110,3 +110,7 @@ auto-push
 testing
  scripts.sh | 20 +++++++++-----------
  1 file changed, 9 insertions(+), 11 deletions(-)
+
+testing multiword arguments + wordmark
+ scripts.sh | 32 +++++++++++++++++++++++---------
+ 1 file changed, 23 insertions(+), 9 deletions(-)

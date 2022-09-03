@@ -3,9 +3,9 @@ git_current_branch () {
 }
 
 create_log_entry () {
-  logmessage=$1
+  logmessage=$@
 
-  if [[ "$1" == "" ]]; then
+  if [[ "$logmessage" == "" ]]; then
     logmessage="$(date)"
   fi
 
@@ -22,9 +22,9 @@ create_log_entry () {
 }
 
 log_and_push () {
-  commitmessage=$1
+  commitmessage=$@
 
-  if [[ "$1" == "" ]]; then
+  if [[ "$commitmessage" == "" ]]; then
     commitmessage="auto-push $(date)"
   fi
 
@@ -75,7 +75,7 @@ sync_config_from_repo_into_home () {
 }
 
 push_eka_config () {
-  commitmessage=$1
+  commitmessage=$@
   echo "Triggering eka-config push to github"
   log_and_push $commitmessage
 }
@@ -185,10 +185,23 @@ descriptions+=("Pull changes from GitHub")
 actions+=(pull)
 options+=("'sync'")
 
+display_word_mark () {
+  echo "           ______,                "
+  echo "              |  |                "
+  echo " ___________, |  |    ___________, "
+  echo "    /   _,  | |  | ----, |_____   \ "
+  echo " __/   /_!  | |  |,/  /  _____ \   \ "
+  echo "  /  ,______| |   _   \   |         \ "
+  echo ",/   |______, !   ,\   \_ |    !\    \, "
+  echo "[__________/ [____] [____]|___________] "
+  echo "ekaekaekaeka ekaeka ekaeka ekaekaekaeka "
+}
+
 display_help () {
   if [[ "$1" == "verbose" ]]; then
     echo "I didn't understand '$arguments' ...Did you mean any of these?"
-    echo ""
+  else
+    display_word_mark
   fi
 
   longest_label_length=0
@@ -204,9 +217,10 @@ display_help () {
 
   get_length_of_longest_label
 
-  echo ",-------------------------,"
-  echo "|    Available actions    |"
-  echo "'-------------------------'"
+  echo ""
+  echo ",-------------------------------------,"
+  echo "|          Available actions          |"
+  echo "'-------------------------------------'"
 
   for (( i=0; i<${#labels[@]}; i++ )); do
     # print label with padding to match longest label
