@@ -1,13 +1,13 @@
 {
   "name": "eka-config",
   "version": "1.0.0",
-  "description": "Some of my workspace config files",
+  "description": "Syncing for some of my workspace config files",
   "main": "''",
   "repository": "git@github.com:erikbjoern/eka-config.git",
   "author": "Erik Björn <erik.g.bjoern@gmail.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "init-config": "chmod ug+x $PWD/init-config.sh && PREFIX= $PWD/init-config.sh"
+    "eka": "chmod ug+x $PWD/scripts.sh && PREFIX= $PWD/scripts.sh"
   }
 }

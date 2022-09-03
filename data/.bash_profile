@@ -186,3 +186,7 @@ store_git_credentials () {
   cat temp-file-2.txt > $PWD/data/.gitconfig
   rm temp-file-2.txt
 }
+
+eka () {
+  . $HOME/eka-config/scripts.sh
+}

@@ -91,3 +91,10 @@ Sat Sep  3 19:28:59 CEST 2022
 Sat Sep  3 19:31:31 CEST 2022
  .gitignore | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+
+refactoring
+ data/.bash_profile |   4 +
+ package.json       |   4 +-
+ readme.md          |   4 +-
+ scripts.sh         | 265 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 273 insertions(+), 4 deletions(-)

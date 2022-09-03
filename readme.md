@@ -1,8 +1,8 @@
 # eka-config
 
 ## initialise
-No dependencies needed, just run:
+No dependencies, just run:
 
 ```bash
-$ yarn init-config
+$ yarn eka init
 ```
