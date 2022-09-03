@@ -21,20 +21,6 @@ create_log_entry () {
   fi
 }
 
-log_and_push () {
-  commitmessage=$@
-
-  if [[ "$commitmessage" == "" ]]; then
-    commitmessage="auto-push $(date)"
-  fi
-
-  create_log_entry $commitmessage
-
-  git add .
-  git commit -m "$commitmessage"
-  git push -q --set-upstream origin $(git_current_branch)
-}
-
 get_local_config () {
   # overwrite config in repo with config in home directory
   cp -f $HOME/.gitconfig $HOME/eka-config/data/
@@ -76,7 +62,18 @@ sync_config_from_repo_into_home () {
 push_eka_config () {
   commitmessage=$@
   echo "Triggering eka-config push to github"
-  log_and_push $commitmessage
+
+  if [[ "$commitmessage" == "" ]]; then
+    commitmessage="auto-push $(date)"
+  fi
+
+  create_log_entry $commitmessage
+
+  if [[ -n $(git status -s) ]]; then
+    git add .
+    git commit -m "$commitmessage"
+    git push -q --set-upstream origin $(git_current_branch)
+  fi
 }
 
 pull_eka_config () {
