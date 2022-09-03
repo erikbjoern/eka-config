@@ -114,7 +114,7 @@ store_git_credentials () {
 log () {
   if [ $# <= 2 ]; then
     highest_accepted_argument=2
-    create_log_entry $2
+    create_log_entry $arg2
   fi
 }
 
@@ -128,7 +128,7 @@ sync () {
   elif [[ "$2" == "push" ]]; then
     highest_accepted_argument=3
     sync_config_from_home_into_repo
-    push_eka_config $3
+    push_eka_config $arg3
   elif [[ "$2" == "pull" ]]; then
     highest_accepted_argument=2
     pull_eka_config
@@ -143,10 +143,10 @@ sync () {
 push () {
   if [[ "$2" == "sync" ]]; then
     sync_config_from_home_into_repo
-    push_eka_config $3
+    push_eka_config $arg3
     highest_accepted_argument=3
   elif [[ $# == 1 ]]; then
-    push_eka_config $2
+    push_eka_config $arg2
   fi
 }
 
@@ -222,12 +222,10 @@ display_help () {
   done
 }
 
-arguments=()
-
-for arg in "$@"; do
-  arguments+=("$arg")
-done
-
+arg1="$1"
+arg2="$2"
+arg3="$3"
+arg4="$4"
 number_of_arguments="$#"
 highest_accepted_argument=0
 
@@ -249,7 +247,7 @@ else
     #if argument matches label, invoke action at the same index
     if [[ "$1" == "${labels[$i]}" ]]; then
       highest_accepted_argument=1
-      ${actions[$i]} $arguments
+      ${actions[$i]} $arg1 $arg2 $arg3 $arg4
     fi
   done
 

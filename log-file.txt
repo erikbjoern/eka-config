@@ -106,3 +106,7 @@ fix
 auto-push
  scripts.sh | 7 ++++++-
  1 file changed, 6 insertions(+), 1 deletion(-)
+
+testing
+ scripts.sh | 20 +++++++++-----------
+ 1 file changed, 9 insertions(+), 11 deletions(-)
