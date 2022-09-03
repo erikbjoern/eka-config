@@ -138,3 +138,8 @@ auto-push Sun Sep 4 01:14:56 CEST 2022
 auto-push Sun Sep 4 01:16:00 CEST 2022
  scripts.sh | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+
+auto-push Sun Sep 4 01:27:30 CEST 2022
+ data/.bash_profile | 123 +----------------------------------------------------
+ scripts.sh         |  79 ++++++++++++++++++----------------
+ 2 files changed, 44 insertions(+), 158 deletions(-)

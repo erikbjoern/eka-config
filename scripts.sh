@@ -80,7 +80,6 @@ push_eka_config () {
 }
 
 pull_eka_config () {
-  cd $HOME/eka-config/
   # if any changes on remote, pull them
   if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
     echo "Pulling eka-config from github"
@@ -159,41 +158,16 @@ pull () {
   fi
 }
 
-labels=()
-descriptions=()
-actions=()
-options=()
-
-labels+=("log")
-descriptions+=("Create a new entry in the log")
-actions+=(log)
-options+=("'<commit message>'")
-
-labels+=("sync")
-descriptions+=("Sync local config into repo (will extract sensitive data into .git-credentials)")
-actions+=(sync)
-options+=("'up', 'down', 'push <commit message>', 'pull'")
-
-labels+=("push")
-descriptions+=("Create log entry etc, then push changes to GitHub")
-actions+=(push)
-options+=("'sync'")
-
-labels+=("pull")
-descriptions+=("Pull changes from GitHub")
-actions+=(pull)
-options+=("'sync'")
-
 display_word_mark () {
-  echo "           ______,                "
-  echo "              |  |                "
-  echo " ___________, |  |    ___________, "
-  echo "    /   _,  | |  | ----, |_____   \ "
-  echo " __/   /_!  | |  |,/  /  _____ \   \ "
-  echo "  /  ,______| |   _   \   |         \ "
-  echo ",/   |______, !   ,\   \_ |    !\    \, "
-  echo "[__________/ [____] [____]|___________] "
-  echo "ekaekaekaeka ekaeka ekaeka ekaekaekaeka "
+  echo "           ______,                     "
+  echo "              |  |                     "
+  echo " ___________, |  |    ___________,     "
+  echo "    /   _,  | |  | ----, |_____   \    "
+  echo " __/   /_!  | |  |,/  /  _____ \   \   "
+  echo "  /  ,______| |   _   \   |         \  "
+  echo ",/   |______, !   ,\   \_ |    !\    \,"
+  echo "[__________/ [____] [____]|___________]"
+  echo "ekaekaekaeka ekaeka ekaeka ekaekaekaeka"
 }
 
 display_help () {
@@ -235,6 +209,31 @@ display_help () {
   done
 }
 
+labels=()
+descriptions=()
+actions=()
+options=()
+
+labels+=("log")
+descriptions+=("Create a new entry in the log")
+actions+=(log)
+options+=("'<commit message>'")
+
+labels+=("sync")
+descriptions+=("Sync local config into repo (will extract sensitive data into .git-credentials)")
+actions+=(sync)
+options+=("'up', 'down', 'push <commit message>', 'pull'")
+
+labels+=("push")
+descriptions+=("Create log entry etc, then push changes to GitHub")
+actions+=(push)
+options+=("'sync'")
+
+labels+=("pull")
+descriptions+=("Pull changes from GitHub")
+actions+=(pull)
+options+=("'sync'")
+
 arg1="$1"
 arg2="$2"
 arg3="$3"
@@ -242,6 +241,10 @@ arg4="$4"
 args="$@"
 number_of_arguments="$#"
 highest_accepted_argument=0
+origin_path=$PWD
+repo_path="$HOME/eka-config/"
+
+cd $repo_path
 
 echo ""
 
@@ -262,6 +265,8 @@ elif [[ $1 == "init" ]]; then
 
   echo "eka-config initialised and sourced"
   echo "Your original config has been moved to $config_backup_directory"
+
+  origin_path=$repo_path
 else 
   for (( i=0; i<${#labels[@]}; i++ )); do
     #if argument matches label, invoke action at the same index
@@ -286,3 +291,5 @@ else
 fi
 
 echo ""
+
+cd $origin_path

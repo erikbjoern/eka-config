@@ -17,7 +17,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # git aliases
@@ -61,8 +60,6 @@ confirm () {
   echo doing stuff...
 }
 
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 
 [ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
@@ -71,122 +68,4 @@ git_current_branch () {
 	cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
 }
 
-create_git_log () {
-  echo "..."
-  if [[ -n $(git status -s) ]]; 
-    then
-      echo "" >> log-file.txt
-      date >> log-file.txt
-      git add -N .
-      echo "Creating git log (log-file.txt):"
-      echo $(git diff --stat -- ':!log-file.txt' ':!.obsidian')
-      git diff --stat -- ':!log-file.txt' ':!.obsidian' >> log-file.txt
-    else 
-      echo "No changes to commit"
-  fi
-}
-
-auto_push () {
-  commitmessage=$1
-
-  create_git_log
-  git add .
-
-
-  if [[ "$1" == "" ]]; then
-    commitmessage="auto-push $(date)"
-  fi
-
-  echo "..."
-  echo "Commiting: $commitmessage"
-  git commit -m "$commitmessage"
-  gpsup
-}
-
-set_local_config () {
-  echo "..."
-  echo "Copying config from '$HOME/eka-config/data/ to $HOME/"
-
-  . ./eka-helpers/set-local-config.sh
-
-  echo "..."
-  echo "Previous local config stored in $HOME/eka-config/previous-local-config/"
-
-  source $HOME/.bash_profile
-
-  echo "..."
-  echo "Local config updated and sourced"
-}
-
-get_local_config () {
-  echo "..."
-  echo "Copying local config into '$HOME/eka-config/"
-
-  cp -f $HOME/.gitconfig $HOME/eka-config/data/
-  cp -f $HOME/.bash_profile $HOME/eka-config/data/
-  cp -rf $HOME/eka-helpers $HOME/eka-config/
-}
-
-
-sync_eka_config_into_repo () {
-  get_local_config
-
-  store_git_credentials
-}
-
-
-push_eka_config () {
-  commitmessage=$1
-
-  sync_eka_config_into_repo
-  
-  echo "..."
-  echo "Triggering eka-config push to github"
-  auto_push $commitmessage
-}
-
-pull_eka_config () {
-  cd $HOME/eka-config/
-  echo "..."
-
-  # if any changes on remote, pull them
-  if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; 
-    then
-      echo "Pulling eka-config from github"
-      git pull
-      
-      set_local_config
-    else 
-      echo "No changes on remote"
-  fi
-}
-
-store_git_credentials () {
-  echo "..."
-
-  sed -n '/\[user\]/,/\[/ { 
-    /\[?[^u]?/b
-    p
-  }' $PWD/data/.gitconfig > temp-file-1.txt
-
-  if [ -s temp-file-1.txt ]
-  then
-    echo "Storing git credentials in $PWD/data/.git-credentials"
-    cat temp-file-1.txt > $PWD/data/.git-credentials
-  else
-    echo "No git credentials found in $PWD/data/.gitconfig"
-  fi
-
-  rm temp-file-1.txt
-
-  echo "..."
-  echo "Deleting git credentials from $PWD/data/.gitconfig"
-
-  sed '/\[user\]/,/\[/{/\[[^u]/!d;}' $PWD/data/.gitconfig > temp-file-2.txt
-  cat temp-file-2.txt > $PWD/data/.gitconfig
-  rm temp-file-2.txt
-}
-
-eka () {
-  . $HOME/eka-config/scripts.sh
-}
+eka () { . $HOME/eka-config/scripts.sh }
