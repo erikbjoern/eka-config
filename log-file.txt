@@ -80,3 +80,10 @@ Sat Sep  3 19:18:39 CEST 2022
  eka-helpers/set-local-config.sh |  2 +-
  init-config.sh                  |  2 --
  4 files changed, 16 insertions(+), 11 deletions(-)
+
+Sat Sep  3 19:28:59 CEST 2022
+ data/.bash_profile              |  188 +++++++
+ data/.gitconfig                 |   21 +
+ data/Default.bttpreset          | 1156 +++++++++++++++++++++++++++++++++++++++
+ eka-helpers/set-local-config.sh |    5 +-
+ 4 files changed, 1367 insertions(+), 3 deletions(-)

@@ -105,7 +105,7 @@ auto_push () {
 
 set_local_config () {
   echo "..."
-  echo "Copying config from '$HOME/eka-config/ to $HOME/"
+  echo "Copying config from '$HOME/eka-config/data/ to $HOME/"
 
   . ./eka-helpers/set-local-config.sh
 
@@ -122,8 +122,8 @@ get_local_config () {
   echo "..."
   echo "Copying local config into '$HOME/eka-config/"
 
-  cp -f $HOME/.gitconfig $HOME/eka-config/
-  cp -f $HOME/.bash_profile $HOME/eka-config/
+  cp -f $HOME/.gitconfig $HOME/eka-config/data/
+  cp -f $HOME/.bash_profile $HOME/eka-config/data/
   cp -rf $HOME/eka-helpers $HOME/eka-config/
 }
 
@@ -167,22 +167,22 @@ store_git_credentials () {
   sed -n '/\[user\]/,/\[/ { 
     /\[?[^u]?/b
     p
-  }' $PWD/.gitconfig > temp-file-1.txt
+  }' $PWD/data/.gitconfig > temp-file-1.txt
 
   if [ -s temp-file-1.txt ]
   then
-    echo "Storing git credentials in $PWD/.git-credentials"
-    cat temp-file-1.txt > $PWD/.git-credentials
+    echo "Storing git credentials in $PWD/data/.git-credentials"
+    cat temp-file-1.txt > $PWD/data/.git-credentials
   else
-    echo "No git credentials found in $PWD/.gitconfig"
+    echo "No git credentials found in $PWD/data/.gitconfig"
   fi
 
   rm temp-file-1.txt
 
   echo "..."
-  echo "Deleting git credentials from $PWD/.gitconfig"
+  echo "Deleting git credentials from $PWD/data/.gitconfig"
 
-  sed '/\[user\]/,/\[/{/\[[^u]/!d;}' $PWD/.gitconfig > temp-file-2.txt
-  cat temp-file-2.txt > $PWD/.gitconfig
+  sed '/\[user\]/,/\[/{/\[[^u]/!d;}' $PWD/data/.gitconfig > temp-file-2.txt
+  cat temp-file-2.txt > $PWD/data/.gitconfig
   rm temp-file-2.txt
 }
