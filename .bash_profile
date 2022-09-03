@@ -163,19 +163,26 @@ pull_eka_config () {
 
 store_git_credentials () {
   echo "..."
-  echo "Copying git credentials into $PWD/.git-credentials"
 
   sed -n '/\[user\]/,/\[/ { 
     /\[?[^u]?/b
     p
-  }' $PWD/.gitconfig > $PWD/.git-credentials
+  }' $PWD/.gitconfig > temp-file-1.txt
+
+  if [ -s temp-file-1.txt ]
+  then
+    echo "Storing git credentials in $PWD/.git-credentials"
+    cat temp-file-1.txt > $PWD/.git-credentials
+  else
+    echo "No git credentials found in $PWD/.gitconfig"
+  fi
+
+  rm temp-file-1.txt
 
   echo "..."
   echo "Deleting git credentials from $PWD/.gitconfig"
 
-  tempfile="$(date -I seconds).txt"
-
-  sed '/\[user\]/,/\[/{/\[[^u]/!d;}' $PWD/.gitconfig > $tempfile
-  cat $tempfile > $PWD/.gitconfig
-  rm $tempfile
+  sed '/\[user\]/,/\[/{/\[[^u]/!d;}' $PWD/.gitconfig > temp-file-2.txt
+  cat temp-file-2.txt > $PWD/.gitconfig
+  rm temp-file-2.txt
 }

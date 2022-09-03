@@ -13,5 +13,3 @@ echo "..."
 
 echo "Your original config has been moved to $HOME/original-local-config"
 echo "..."
-
-
