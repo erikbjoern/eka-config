@@ -13,7 +13,7 @@ create_log_entry () {
     echo "" >> log-file.txt
     echo $logmessage >> log-file.txt
     git add -N .
-    echo "Creating git log (log-file.txt):"
+    echo "Creating log entry (log-file.txt):"
     echo "$(git diff --stat -- ':!log-file.txt' ':!.obsidian')"
     git diff --stat -- ':!log-file.txt' ':!.obsidian' >> log-file.txt
   else 
