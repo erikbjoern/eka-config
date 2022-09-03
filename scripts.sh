@@ -199,7 +199,7 @@ display_word_mark () {
 
 display_help () {
   if [[ "$1" == "verbose" ]]; then
-    echo "I didn't understand '$arguments' ...Did you mean any of these?"
+    echo "I didn't understand '$args' ...Did you mean any of these?"
   else
     display_word_mark
   fi
@@ -240,6 +240,7 @@ arg1="$1"
 arg2="$2"
 arg3="$3"
 arg4="$4"
+args="$@"
 number_of_arguments="$#"
 highest_accepted_argument=0
 
