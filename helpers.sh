@@ -28,9 +28,9 @@ get_local_config () {
     cp -f "$local_vscode_path/keybindings.json" $repo_vscode_path/
   fi
 
-  git stash -m "This is the stash that contains the INCOMING files"
+  git stash -qm "This is the stash that contains the INCOMING files"
 
-  git stash pop
+  git stash pop -q
   new_number_of_stashes=$(git stash list | wc -l)
 
   if [[ $number_of_stashes != $new_number_of_stashes ]]; then
