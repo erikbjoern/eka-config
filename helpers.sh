@@ -16,10 +16,7 @@ display_word_mark () {
 get_local_config () {
   # pull local config into repo
   number_of_stashes="$(git rev-list --walk-reflogs --count refs/stash)"
-  rm -rf $EKA/data
-  git stash -m "This is the stash that contains CURRENT files"
 
-  mkdir $EKA/data
   cp -f $HOME/.gitconfig $EKA/data/
   cp -f $HOME/.bash_profile $EKA/data/
 
@@ -31,11 +28,9 @@ get_local_config () {
     cp -f "$local_vscode_path/keybindings.json" $repo_vscode_path/
   fi
 
-  rm -rf $EKA/data
-  git stash -m "This is the stash that contains INCOMING files"
+  git stash -m "This is the stash that contains the INCOMING files"
 
-  git stash pop stash@{1}
-  git stash pop stash@{0}
+  git stash pop
   new_number_of_stashes="$(git rev-list --walk-reflogs --count refs/stash)"
 
   if [[ $number_of_stashes != $new_number_of_stashes ]]; then
