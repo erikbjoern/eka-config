@@ -41,7 +41,7 @@ get_local_config () {
   if [[ $number_of_stashes != $new_number_of_stashes ]]; then
     echo "Stash conflict. Please resolve the conflict and run 'eka sync' again."
     echo ""
-    git stash --list
+    git stash list
   fi
 }
 
