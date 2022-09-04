@@ -15,7 +15,7 @@ display_word_mark () {
 
 get_local_config () {
   # pull local config into repo
-  number_of_stashes="$(git rev-list --walk-reflogs --count refs/stash)"
+  number_of_stashes=$(git stash list | wc -l)
 
   cp -f $HOME/.gitconfig $EKA/data/
   cp -f $HOME/.bash_profile $EKA/data/
@@ -31,7 +31,7 @@ get_local_config () {
   git stash -m "This is the stash that contains the INCOMING files"
 
   git stash pop
-  new_number_of_stashes="$(git rev-list --walk-reflogs --count refs/stash)"
+  new_number_of_stashes=$(git stash list | wc -l)
 
   if [[ $number_of_stashes != $new_number_of_stashes ]]; then
     echo "Stash conflict. Please resolve the conflict and run 'eka sync' again."
