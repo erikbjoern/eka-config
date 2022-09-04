@@ -172,3 +172,9 @@ auto-push Sun Sep 4 01:44:17 CEST 2022
 style update
  scripts.sh | 57 +++++++++++++++++++++++++++++++++------------------------
  1 file changed, 33 insertions(+), 24 deletions(-)
+
+refactoring
+ data/.bash_profile |   4 +-
+ helpers.sh         | 115 ++++++++++++++++++++++++++++++++++++++++
+ scripts.sh         | 152 ++++++++++++++++++-----------------------------------
+ 3 files changed, 168 insertions(+), 103 deletions(-)

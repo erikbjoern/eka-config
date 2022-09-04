@@ -68,4 +68,6 @@ git_current_branch () {
 	cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
 }
 
-eka () { . $HOME/eka-config/scripts.sh }
+export EKA="/Users/erikbjorn/eka-config"
+eka () { . $EKA/scripts.sh ;}
+
