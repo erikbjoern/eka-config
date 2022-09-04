@@ -194,3 +194,9 @@ vscode
  helpers.sh                                         |  26 +-
  scripts.sh                                         |   5 +
  5 files changed, 581 insertions(+), 1 deletion(-)
+
+auto-push Sun Sep 4 19:44:00 CEST 2022
+ data/vscode/snippets/custom-snippets.code-snippets | 1 +
+ helpers.sh                                         | 5 +++++
+ scripts.sh                                         | 6 ++++++
+ 3 files changed, 12 insertions(+)

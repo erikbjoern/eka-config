@@ -32,6 +32,12 @@ create_log_entry () {
 }
 
 sync_config_from_home_into_repo () {
+  if [[ -n $(git status -s) ]]; then
+    echo ""
+    echo "You have uncommitted changes in your eka repo. Please commit or stash them before syncing."
+    return
+  fi
+
   echo "Copying local config into repo at $EKA/"
   echo "Copying config from $local_vscode_path into $repo_vscode_path"
 

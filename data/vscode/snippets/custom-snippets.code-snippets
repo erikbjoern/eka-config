@@ -22,6 +22,7 @@
       "  .then(() => console.timeEnd('Done in'))",
       "  .catch(console.error)",
       "  .finally(() => db.\\$disconnect())",
+      "",
       ""
     ],
     "description": "scaffolds a database script"

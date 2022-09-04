@@ -14,6 +14,9 @@ display_word_mark () {
 }
 
 get_local_config () {
+  rm -rf $EKA/data
+  git stash -m "stash before syncing"
+
   # overwrite config in repo with config in home directory
   cp -f $HOME/.gitconfig $EKA/data/
   cp -f $HOME/.bash_profile $EKA/data/
@@ -25,6 +28,8 @@ get_local_config () {
     cp -f "$local_vscode_path/settings.json" $repo_vscode_path/
     cp -f "$local_vscode_path/keybindings.json" $repo_vscode_path/
   fi
+
+  git stash pop
 }
 
 init () {
