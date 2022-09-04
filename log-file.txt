@@ -168,3 +168,7 @@ auto-push Sun Sep 4 01:43:00 CEST 2022
 auto-push Sun Sep 4 01:44:17 CEST 2022
  scripts.sh | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+
+style update
+ scripts.sh | 57 +++++++++++++++++++++++++++++++++------------------------
+ 1 file changed, 33 insertions(+), 24 deletions(-)

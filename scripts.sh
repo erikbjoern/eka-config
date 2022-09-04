@@ -2,6 +2,13 @@ git_current_branch () {
 	cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
 }
 
+set_highest_accepted_arg () {
+  # if argument is higher than highest_accepted_argument, update highest_accepted_argument
+  if [[ $1 > $highest_accepted_argument ]]; then
+    highest_accepted_argument=$1
+  fi
+}
+
 create_log_entry () {
   logmessage=$@
 
@@ -108,28 +115,28 @@ store_git_credentials () {
 
 log () {
   if [[ $# < 3 ]]; then
-    highest_accepted_argument=2
+    set_highest_accepted_arg 2
     create_log_entry $arg2
   fi
 }
 
 sync () {
   if [[ "$2" == "up" ]]; then
-    highest_accepted_argument=2
+    set_highest_accepted_arg 2
     sync_config_from_home_into_repo
   elif [[ "$2" == "down" ]]; then
-    highest_accepted_argument=2
+    set_highest_accepted_arg 2
     sync_config_from_repo_into_home
   elif [[ "$2" == "push" ]]; then
-    highest_accepted_argument=3
+    set_highest_accepted_arg 3
     sync_config_from_home_into_repo
     push_eka_config $arg3
   elif [[ "$2" == "pull" ]]; then
-    highest_accepted_argument=2
+    set_highest_accepted_arg 2
     pull_eka_config
     sync_config_from_repo_into_home
   else
-    highest_accepted_argument=2
+    set_highest_accepted_arg 2
     echo "Invalid argument for 'sync'. Use 'up'/'down' to sync local config into or from this repo."
     echo "Or chain with 'push'/'pull' to push/pull this repo to/from github."
   fi
@@ -137,20 +144,20 @@ sync () {
 
 push () {
   if [[ "$2" == "sync" ]]; then
-    highest_accepted_argument=3
+    set_highest_accepted_arg 3
     sync_config_from_home_into_repo
     push_eka_config $arg3
-  elif [[ $# == 2 ]]; then
-    highest_accepted_argument=2
+  elif [[ $number_of_arguments == 2 ]]; then
+    set_highest_accepted_arg 2
     push_eka_config $arg2
-  elif [[ $# == 1 ]]; then
+  elif [[ $number_of_arguments == 1 ]]; then
     push_eka_config
   fi
 }
 
 pull () {
   if [[ "$2" == "sync" ]]; then
-    highest_accepted_argument=2
+    set_highest_accepted_arg 2
     pull_eka_config
     set_local_config
   elif [[ $# == 1 ]]; then
@@ -159,14 +166,14 @@ pull () {
 }
 
 display_word_mark () {
-  echo "           ______,                     "
-  echo "              |  |                     "
-  echo " ___________, |  |    ___________,     "
-  echo "    /   _,  | |  | ----, |_____   \    "
-  echo " __/   /_!  | |  |,/  /  _____ \   \   "
-  echo "  /  ,______| |   _   \   |         \  "
-  echo ",/   |______, !   ,\   \_ |    !\    \,"
-  echo "[__________/ [____] [____]|___________]"
+  echo "            _____,                     "
+  echo "              |  †                     "
+  echo "   _________, |  |     __________,     "
+  echo "    /   _,  † |  |  ---, /_____   \    "
+  echo "   /   /_!  | |  |,/  /    ___ \   +   "
+  echo "  /  ,______/ |   _   \   /         \  "
+  echo ",/   |______, !   ,\   \_ †    !\    \,"
+  echo "[__________/ [____] [____][___________]"
   echo "ekaekaekaeka ekaeka ekaeka ekaekaekaeka"
 }
 
@@ -193,20 +200,22 @@ display_help () {
   echo ""
   echo ",-------------------------------------,"
   echo "|          Available actions          |"
-  echo "'-------------------------------------'"
+  echo "|-------------------------------------'"
+  echo "|"
 
   for (( i=0; i<${#labels[@]}; i++ )); do
     # print label with padding to match longest label
-    printf "%-${longest_label_length}s" "${labels[$i]}:"
+    printf "| %-${longest_label_length}s" "${labels[$i]}:"
     echo "${descriptions[$i]}"
-    printf "%-${longest_label_length}s" ""
+    printf "| %-${longest_label_length}s" ""
 
     if [[ "${options[$i]}" != "" ]]; then
       echo "[${options[$i]}]"
     fi
 
-    echo ""
+    echo "|"
   done
+  echo "'--------------------------------------"
 }
 
 labels=()
@@ -271,7 +280,7 @@ else
   for (( i=0; i<${#labels[@]}; i++ )); do
     #if argument matches label, invoke action at the same index
     if [[ "$1" == "${labels[$i]}" ]]; then
-      highest_accepted_argument=1
+      set_highest_accepted_arg 1
       ${actions[$i]} $arg1 $arg2 $arg3 $arg4
     fi
   done
