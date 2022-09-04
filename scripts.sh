@@ -1,3 +1,6 @@
+local_vscode_path="$HOME/Library/Application Support/Code/User"
+repo_vscode_path=$EKA/data/vscode
+
 git_current_branch () {
 	cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
 }
@@ -30,6 +33,7 @@ create_log_entry () {
 
 sync_config_from_home_into_repo () {
   echo "Copying local config into repo at $EKA/"
+  echo "Copying config from $local_vscode_path into $repo_vscode_path"
 
   $helper get_local_config
   $helper store_git_credentials_in_repo
@@ -37,6 +41,7 @@ sync_config_from_home_into_repo () {
 
 sync_config_from_repo_into_home () {
   echo "Copying config from '$EKA/data/ to $HOME/"
+  echo "Copying config from $repo_vscode_path to $local_vscode_path"
 
   $helper set_local_config
 

@@ -186,3 +186,11 @@ go
 auto-push Sun Sep 4 19:01:41 CEST 2022
  scripts.sh | 15 ++++++++++++++-
  1 file changed, 14 insertions(+), 1 deletion(-)
+
+vscode
+ data/vscode/keybindings.json                       | 377 +++++++++++++++++++++
+ data/vscode/settings.json                          | 145 ++++++++
+ data/vscode/snippets/custom-snippets.code-snippets |  29 ++
+ helpers.sh                                         |  26 +-
+ scripts.sh                                         |   5 +
+ 5 files changed, 581 insertions(+), 1 deletion(-)

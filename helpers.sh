@@ -1,3 +1,6 @@
+local_vscode_path="$HOME/Library/Application Support/Code/User"
+repo_vscode_path=$EKA/data/vscode
+
 display_word_mark () {
   echo "            _____,              v.1.0.0"
   echo "              |  †                     "
@@ -14,6 +17,14 @@ get_local_config () {
   # overwrite config in repo with config in home directory
   cp -f $HOME/.gitconfig $EKA/data/
   cp -f $HOME/.bash_profile $EKA/data/
+
+  # copy vscode config
+  if [ -d "$local_vscode_path" ]; then
+    mkdir -p $repo_vscode_path
+    cp -rf "$local_vscode_path/snippets" $repo_vscode_path/
+    cp -f "$local_vscode_path/settings.json" $repo_vscode_path/
+    cp -f "$local_vscode_path/keybindings.json" $repo_vscode_path/
+  fi
 }
 
 init () {
@@ -61,12 +72,25 @@ set_local_config () {
   cp -f $HOME/.gitconfig $EKA/previous-local-config/
   cp -f $HOME/.bash_profile $EKA/previous-local-config/
   
-  # copy new config into home directory
+  # copy new config from repo into home directory
   cp -f $EKA/data/.bash_profile $HOME/
   cp -f $EKA/data/.gitconfig $HOME/
 
   # append credentials to gitconfig
   cat $EKA/data/.git-credentials >> $HOME/.gitconfig
+
+  if [[ -d "$local_vscode_path" && -d "$repo_vscode_path" ]]; then
+    # backup current vscode config
+    mkdir -p $EKA/previous-local-config/vscode
+    cp -rf "$local_vscode_path/snippets" "$EKA/previous-local-config/vscode/"
+    cp -f "$local_vscode_path/settings.json" "$EKA/previous-local-config/vscode/"
+    cp -f "$local_vscode_path/keybindings.json" "$EKA/previous-local-config/vscode/"
+
+    # copy vscode config from repo into home directory
+    cp -rf "$repo_vscode_path/snippets" "$local_vscode_path/"
+    cp -f "$repo_vscode_path/settings.json" "$local_vscode_path/"
+    cp -f "$repo_vscode_path/keybindings.json" "$local_vscode_path/"
+  fi
 }
 
 store_git_credentials_in_repo () {
