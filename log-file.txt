@@ -200,3 +200,8 @@ auto-push Sun Sep 4 19:44:00 CEST 2022
  helpers.sh                                         | 5 +++++
  scripts.sh                                         | 6 ++++++
  3 files changed, 12 insertions(+)
+
+wip
+ data/.bash_profile |  2 +-
+ helpers.sh         | 19 ++++++++++++++++---
+ 2 files changed, 17 insertions(+), 4 deletions(-)

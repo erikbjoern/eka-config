@@ -14,10 +14,12 @@ display_word_mark () {
 }
 
 get_local_config () {
+  # pull local config into repo
+  number_of_stashes="$(git rev-list --walk-reflogs --count refs/stash)"
   rm -rf $EKA/data
-  git stash -m "stash before syncing"
+  git stash -m "This is the stash that contains CURRENT files"
 
-  # overwrite config in repo with config in home directory
+  mkdir $EKA/data
   cp -f $HOME/.gitconfig $EKA/data/
   cp -f $HOME/.bash_profile $EKA/data/
 
@@ -29,7 +31,18 @@ get_local_config () {
     cp -f "$local_vscode_path/keybindings.json" $repo_vscode_path/
   fi
 
-  git stash pop
+  rm -rf $EKA/data
+  git stash -m "This is the stash that contains INCOMING files"
+
+  git stash pop stash@{1}
+  git stash pop stash@{0}
+  new_number_of_stashes="$(git rev-list --walk-reflogs --count refs/stash)"
+
+  if [[ $number_of_stashes != $new_number_of_stashes ]]; then
+    echo "Stash conflict. Please resolve the conflict and run 'eka sync' again."
+    echo ""
+    git stash --list
+  fi
 }
 
 init () {
