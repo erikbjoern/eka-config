@@ -178,3 +178,11 @@ refactoring
  helpers.sh         | 115 ++++++++++++++++++++++++++++++++++++++++
  scripts.sh         | 152 ++++++++++++++++++-----------------------------------
  3 files changed, 168 insertions(+), 103 deletions(-)
+
+go
+ scripts.sh | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+auto-push Sun Sep 4 19:01:41 CEST 2022
+ scripts.sh | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)

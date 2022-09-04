@@ -157,15 +157,21 @@ display_help () {
     # print label with padding to match longest label
     printf "| %-${longest_label_length}s" "${labels[$i]}:"
     echo "${descriptions[$i]}"
-    printf "| %-${longest_label_length}s" ""
 
     if [[ "${options[$i]}" != "" ]]; then
+      printf "| %-${longest_label_length}s" ""
       echo "[${options[$i]}]"
     fi
 
     echo "|"
   done
   echo "'--------------------------------------"
+}
+
+go () {
+  cd $EKA
+  echo ""
+  echo "You are now in the eka repo"
 }
 
 labels=()
@@ -192,6 +198,13 @@ labels+=("pull")
 descriptions+=("Pull changes from GitHub")
 actions+=(pull)
 options+=("'sync'")
+
+if [[ $PWD != $EKA ]]; then
+  labels+=("go")
+  descriptions+=("Go to the eka repo directory")
+  actions+=(go)
+  options+=("")
+fi
 
 arg1="$1"
 arg2="$2"
