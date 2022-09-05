@@ -38,6 +38,8 @@ get_local_config () {
     echo ""
 
     git stash show
+  else 
+    echo "No conflicts detected"
   fi
 }
 
