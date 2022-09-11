@@ -41,6 +41,10 @@ alias db-check-up='grep ^DATABASE_URL .env && db-migrate up --check'
 alias migrate-down='grep ^DATABASE_URL .env && db-migrate down --check && confirm && db-migrate down'
 alias migrate-up='grep ^DATABASE_URL .env && db-migrate up --check && confirm && db-migrate up'
 
+# aws / kubernetes aliases
+alias kcluster='kubectl config get-contexts | fzf | tr -s " " | cut -d" " -f2 | xargs kubectl config use-context'
+alias kns='kubectl get ns | fzf | cut -d" " -f1 | xargs kubectl config set-context --current --namespace'
+
 new_file () {
   touch $1
   code $1
@@ -67,6 +71,8 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$*" ;}
 git_current_branch () {
 	cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
 }
+
+
 
 export EKA="/Users/erikbjorn/eka-config"
 eka () { . $EKA/scripts.sh ;}

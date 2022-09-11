@@ -236,3 +236,9 @@ move local files
  helpers.sh                                         | 2 +-
  scripts.sh                                         | 8 +++++++-
  5 files changed, 25 insertions(+), 2 deletions(-)
+
+auto-push Sun 11 Sep 2022 19:03:34 CEST
+ data/.bash_profile                                 | 6 ++++++
+ data/vscode/settings.json                          | 7 +++++++
+ data/vscode/snippets/custom-snippets.code-snippets | 4 ++++
+ 3 files changed, 17 insertions(+)

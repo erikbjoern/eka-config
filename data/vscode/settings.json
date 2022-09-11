@@ -142,4 +142,11 @@
   "editor.inlineSuggest.enabled": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.stickyScroll.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "vue": false
+  },
 }
