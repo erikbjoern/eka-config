@@ -1,3 +1,7 @@
+if [[ -f ./local/eka-path.txt ]]; then
+  export EKA=$(cat ./local/eka-path.txt)
+fi
+
 local_vscode_path="$HOME/Library/Application Support/Code/User"
 repo_vscode_path=$EKA/data/vscode
 
@@ -54,7 +58,13 @@ init () {
   echo ""
   echo "Initialising eka-config"
 
-  export EKA=$PWD
+  repo_path=$PWD
+
+  mkdir -p $repo_path/local
+
+  echo $repo_path > $repo_path/local/eka-path.txt
+
+  export EKA=$repo_path
 
   if [[ $(grep -c "eka" $EKA/data/.bash_profile) -gt 0 ]]; then
     sed -i '' '/export EKA/d' $EKA/data/.bash_profile
@@ -84,16 +94,18 @@ init () {
 
 set_local_config () {
   # backup current config
-  mkdir -p previous-local-config
-  cp -f $HOME/.gitconfig $EKA/previous-local-config/
-  cp -f $HOME/.bash_profile $EKA/previous-local-config/
+  mkdir -p local/previous-local-config
+  cp -f $HOME/.gitconfig $EKA/local/previous-local-config/
+  cp -f $HOME/.bash_profile $EKA/local/previous-local-config/
   
   # copy new config from repo into home directory
   cp -f $EKA/data/.bash_profile $HOME/
   cp -f $EKA/data/.gitconfig $HOME/
 
-  # append credentials to gitconfig
-  cat $EKA/data/.git-credentials >> $HOME/.gitconfig
+  if [[ -f $EKA/local/.git-credentials ]]; then
+    # append credentials to gitconfig
+    cat $EKA/local/.git-credentials >> $HOME/.gitconfig
+  fi
 
   if [[ -d "$local_vscode_path" && -d "$repo_vscode_path" ]]; then
     # backup current vscode config
@@ -127,8 +139,8 @@ store_git_credentials_in_repo () {
   }' $path_to_gitconfig > temp-file-1.txt
 
   if [ -s temp-file-1.txt ]; then
-    echo "Storing git credentials in $EKA/data/.git-credentials"
-    cat temp-file-1.txt > $EKA/data/.git-credentials
+    echo "Storing git credentials in $EKA/local/.git-credentials"
+    cat temp-file-1.txt > $EKA/local/.git-credentials
   fi
   rm -f temp-file-1.txt
 

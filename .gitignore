@@ -1,5 +1,2 @@
-# backup of previous config
-previous-local-config/
-
-# extracted git user config
-**/.git-credentials
+# files specific to the local machine
+local/

@@ -51,7 +51,7 @@ sync_config_from_repo_into_home () {
 
   $helper set_local_config
 
-  echo "Previous local config stored in $EKA/previous-local-config/"
+  echo "Previous local config stored in $EKA/local/previous-local-config/"
 
   source $HOME/.bash_profile
 
@@ -88,7 +88,7 @@ pull_eka_config () {
 log () {
   if [[ $# < 3 ]]; then
     set_highest_accepted_arg 2
-    create_log_entry $arg2
+    create_log_entry "$2"
   fi
 }
 
@@ -102,7 +102,7 @@ sync () {
   elif [[ "$2" == "push" ]]; then
     set_highest_accepted_arg 3
     sync_config_from_home_into_repo
-    push_eka_config $arg3
+    push_eka_config "$3"
   elif [[ "$2" == "pull" ]]; then
     set_highest_accepted_arg 2
     pull_eka_config
@@ -118,10 +118,10 @@ push () {
   if [[ "$2" == "sync" ]]; then
     set_highest_accepted_arg 3
     sync_config_from_home_into_repo
-    push_eka_config $arg3
+    push_eka_config "$3"
   elif [[ $number_of_arguments == 2 ]]; then
     set_highest_accepted_arg 2
-    push_eka_config $arg2
+    push_eka_config "$2"
   elif [[ $number_of_arguments == 1 ]]; then
     push_eka_config
   fi
@@ -217,11 +217,6 @@ if [[ $PWD != $EKA ]]; then
   options+=("")
 fi
 
-arg1="$1"
-arg2="$2"
-arg3="$3"
-arg4="$4"
-args="$@"
 number_of_arguments="$#"
 highest_accepted_argument=0
 origin_path=$PWD
@@ -254,7 +249,8 @@ else
       #if argument matches label, invoke action at the same index
       if [[ "$1" == "${labels[$i]}" ]]; then
         set_highest_accepted_arg 1
-        ${actions[$i]} $arg1 $arg2 $arg3 $arg4
+
+        ${actions[$i]} "$@"
       fi
     done
 

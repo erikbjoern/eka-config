@@ -1,0 +1,32 @@
+{
+  "database-script": {
+    "prefix": "database-script",
+    "body": [
+      "import { PrismaClient } from '@prisma/client'",
+      "",
+      "const dotenv = require('dotenv')",
+      "dotenv.config()",
+      "",
+      "const db = new PrismaClient()",
+      "",
+      "console.time('Done in')",
+      "",
+      "async function run() {",
+      "  await db.\\$connect()",
+      "  console.log('Running...')",
+      "",
+      "  $0",
+      "}",
+      "",
+      "run()",
+      "  .then(() => console.timeEnd('Done in'))",
+      "  .catch(console.error)",
+      "  .finally(() => db.\\$disconnect())"
+    ],
+    "description": "scaffolds a database script"
+  },
+  "voadyError": {
+    "prefix": "throw voadyError",
+    "body": "throw voadyError(VoadyErrorType.${1:ErrorType})"
+  }
+}

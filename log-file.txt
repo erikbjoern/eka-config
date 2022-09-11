@@ -228,3 +228,11 @@ wip
 auto-push Mon 5 Sep 2022 13:43:17 CEST
  helpers.sh | 2 ++
  1 file changed, 2 insertions(+)
+
+move local files
+ data/.bash_profile                                 | 6 ++++++
+ data/vscode/settings.json                          | 7 +++++++
+ data/vscode/snippets/custom-snippets.code-snippets | 4 ++++
+ helpers.sh                                         | 2 +-
+ scripts.sh                                         | 8 +++++++-
+ 5 files changed, 25 insertions(+), 2 deletions(-)
