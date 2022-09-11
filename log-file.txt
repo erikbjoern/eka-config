@@ -242,3 +242,5 @@ auto-push Sun 11 Sep 2022 19:03:34 CEST
  data/vscode/settings.json                          | 7 +++++++
  data/vscode/snippets/custom-snippets.code-snippets | 4 ++++
  3 files changed, 17 insertions(+)
+
+remove earlier 'previous-local-config'
