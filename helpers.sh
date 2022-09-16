@@ -66,10 +66,13 @@ init() {
   if [[ $(grep -c "eka" $EKA/data/.bash_profile) -gt 0 ]]; then
     sed -i '' '/eka/d' $EKA/data/.bash_profile
   fi
-  echo "Adding command 'eka' to .bash_profile"
 
-  echo "eka () { . \$EKA/scripts.sh ;}" >>$EKA/data/.bash_profile
+  # trim all trailing newlines from $EKA/data/.bash_profile
+  sed -i '' -e :a -e '/^\n*$/{$d;N;};/\n$/ba' $EKA/data/.bash_profile
+
+  echo "Adding command 'eka' to .bash_profile"
   echo "" >>$EKA/data/.bash_profile
+  echo "eka () { . \$EKA/scripts.sh ;}" >>$EKA/data/.bash_profile
 
   # backup current config
   config_backup_directory=$HOME/original-local-config/$(date -I seconds)

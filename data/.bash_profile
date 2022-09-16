@@ -76,13 +76,5 @@ git_current_branch() {
   cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
 }
 
-
-
-
-
-
-
-
 eka () { . $EKA/scripts.sh ;}
-
 
