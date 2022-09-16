@@ -13,11 +13,7 @@ set_highest_accepted_arg () {
 }
 
 create_log_entry () {
-  logmessage=$@
-
-  if [[ "$logmessage" == "" ]]; then
-    logmessage="$(date)"
-  fi
+  logmessage="$@ $(date)"
 
   if [[ -n $(git status -s) ]]; then
     echo "" >> log-file.txt
@@ -58,12 +54,23 @@ sync_config_from_repo_into_home () {
   echo "Local config updated and sourced"
 }
 
+detect_git_conflict () {
+  ahead=$(git rev-list --count --left-only HEAD...origin/$(git_current_branch))
+  behind=$(git rev-list --count --right-only HEAD...origin/$(git_current_branch))
+
+  if [[ $ahead > 0 && $behind > 0 ]]; then
+    return 1
+  fi
+
+  return 0
+}
+
 push_eka_config () {
   commitmessage=$@
   echo "Triggering eka-config push to github"
 
   if [[ "$commitmessage" == "" ]]; then
-    commitmessage="auto-push $(date)"
+    commitmessage="auto-push"
   fi
 
   create_log_entry $commitmessage
@@ -245,26 +252,30 @@ else
     echo "|      eka is already initialised     |"
     echo "'-------------------------------------'"
   else
-    for (( i=0; i<${#labels[@]}; i++ )); do
-      #if argument matches label, invoke action at the same index
-      if [[ "$1" == "${labels[$i]}" ]]; then
-        set_highest_accepted_arg 1
+    if [[ "$(detect_git_conflict)" == "1" ]]; then
+      echo "You seem to have a conflict with remote"
+    else 
+      for (( i=0; i<${#labels[@]}; i++ )); do
+        #if argument matches label, invoke action at the same index
+        if [[ "$1" == "${labels[$i]}" ]]; then
+          set_highest_accepted_arg 1
 
-        ${actions[$i]} "$@"
-      fi
-    done
+          ${actions[$i]} "$@"
+        fi
+      done
 
-    if [[ $highest_accepted_argument == 0 ]]; then
-      # if no action was invoked, check if help was requested
-      help_flags=("-h" "--help" "help")
+      if [[ $highest_accepted_argument == 0 ]]; then
+        # if no action was invoked, check if help was requested
+        help_flags=("-h" "--help" "help")
 
-      if [[ " ${help_flags[@]} " =~ " $1 " ]]; then
-        display_help
-      else
+        if [[ " ${help_flags[@]} " =~ " $1 " ]]; then
+          display_help
+        else
+          display_help verbose
+        fi
+      elif [[ $highest_accepted_argument < $number_of_arguments ]]; then
         display_help verbose
       fi
-    elif [[ $highest_accepted_argument < $number_of_arguments ]]; then
-      display_help verbose
     fi
   fi
 
