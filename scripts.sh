@@ -94,25 +94,23 @@ pull_eka_config() {
 
 log() {
   if [[ "$2" == "show" ]]; then
+    set_highest_accepted_arg 2
+    
     if [[ ! -f ./log-file.txt ]]; then
       echo "No log-file.txt found"
       return
     fi
 
-    set_highest_accepted_arg 2
-
-    if [[ "$3" == "last" ]]; then
-      set_highest_accepted_arg 4
-      if [[ "$4" != "" && "$4" != "0" ]]; then
-        tail "-$4" log-file.txt
-      else
-        awk '/^$/ { buf = "" } { buf = buf "\n" $0 } END { print buf }' log-file.txt
-      fi
-    elif [[ $# == 2 ]]; then
-      cat ./log-file.txt
+    if [[ "$3" == "" ]]; then
+      awk '/^$/ { buf = "" } { buf = buf "\n" $0 } END { print buf }' log-file.txt
     else
-      echo "'$3' is not a valid argument for 'show'"
-      set_highest_accepted_arg $#
+      set_highest_accepted_arg 3
+
+      if [[ "$3" == "full" ]]; then
+        cat ./log-file.txt
+      else
+        tail "-$3" log-file.txt
+      fi
     fi
   elif [[ $# < 3 ]]; then
     set_highest_accepted_arg 2

@@ -81,6 +81,9 @@ init() {
 
   set_local_config
 
+  git config --global user.name "Erik Björn"
+  git config --global user.email "erik.g.bjoern@gmail.com"
+
   source $HOME/.bash_profile
 
   echo "eka-config initialised"
@@ -117,11 +120,14 @@ set_local_config() {
   fi
 
   # replace EKA path in bash_profile with local/eka-path
-  if [[ $(grep -c "EKA" $EKA/data/.bash_profile) -gt 0 ]]; then
-    sed -i '' '/export EKA/d' $EKA/data/.bash_profile
+  if [[ $(grep -c "EKA" $HOME/.bash_profile) -gt 0 ]]; then
+    sed -i '' '/export EKA/d' $HOME/.bash_profile
   fi
 
-  echo cat $EKA/local/eka-path.txt >>$EKA/data/.bash_profile
+  # trim all trailing newlines from $HOME/.bash_profile
+  sed -i '' -e :a -e '/^\n*$/{$d;N;};/\n$/ba' $HOME/.bash_profile
+
+  echo "export EKA=$(cat $EKA/local/eka-path.txt)" >>$HOME/.bash_profile
   echo "" >>$EKA/data/.bash_profile
 }
 

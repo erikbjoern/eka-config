@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "eka": "chmod ug+x $PWD/scripts.sh && chmod ug+x $PWD/helpers.sh && PREFIX= EKA=$PWD $PWD/scripts.sh",
+    "eka": "chmod ug+x $PWD/scripts.sh && chmod ug+x $PWD/helpers.sh && PREFIX= $PWD/scripts.sh",
     "eka:init": "yarn eka init"
   }
 }

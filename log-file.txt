@@ -257,3 +257,10 @@ adjustments, trying to improve usage from different machines/users Fri Sep 16 19
  package.json       |  4 +--
  scripts.sh         | 57 +++++++++++++++++++++--------------------
  5 files changed, 87 insertions(+), 82 deletions(-)
+
+further improvements Fri Sep 16 20:20:35 CEST 2022
+ data/.bash_profile | 11 ++++++++++-
+ helpers.sh         |  9 ++++++---
+ package.json       |  2 +-
+ scripts.sh         | 20 +++++++++-----------
+ 4 files changed, 26 insertions(+), 16 deletions(-)
