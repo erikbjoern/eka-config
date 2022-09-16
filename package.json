@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "eka": "chmod ug+x $PWD/scripts.sh && chmod ug+x $PWD/helpers.sh && PREFIX= $PWD/scripts.sh",
+    "eka": "chmod ug+x $PWD/scripts.sh && chmod ug+x $PWD/helpers.sh && PREFIX= $PWD/scripts.sh && git config --global user.name 'Erik Björn' && git config --global user.email erik.g.bjoern@gmail.com",
     "eka:init": "yarn eka init"
   }
 }

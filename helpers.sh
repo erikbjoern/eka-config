@@ -84,9 +84,6 @@ init() {
 
   set_local_config
 
-  git config --global user.name "Erik Björn"
-  git config --global user.email "erik.g.bjoern@gmail.com"
-
   source $HOME/.bash_profile
 
   echo "eka-config initialised"

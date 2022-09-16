@@ -274,3 +274,9 @@ test? Fri Sep 16 20:42:05 CEST 2022
  data/.bash_profile | 1 -
  helpers.sh         | 2 +-
  2 files changed, 1 insertion(+), 2 deletions(-)
+
+set default git credentials in init script Fri Sep 16 21:08:29 CEST 2022
+ helpers.sh   | 3 ---
+ package.json | 2 +-
+ readme.md    | 2 +-
+ 3 files changed, 2 insertions(+), 5 deletions(-)
