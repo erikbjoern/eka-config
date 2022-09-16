@@ -93,7 +93,28 @@ pull_eka_config () {
 }
 
 log () {
-  if [[ $# < 3 ]]; then
+  if [[ "$2" == "show" ]]; then
+    if [[ ! -f ./log-file.txt ]]; then
+      echo "No log-file.txt found"
+      return
+    fi
+
+    set_highest_accepted_arg 2
+    
+    if [[ "$3" == "last" ]]; then
+      set_highest_accepted_arg 4
+      if [[ "$4" != "" && "$4" != "0" ]]; then
+        tail "-$4" log-file.txt
+      else
+        awk '/^$/ { buf = "" } { buf = buf "\n" $0 } END { print buf }' log-file.txt
+      fi
+    elif [[ $# == 2 ]]; then
+     cat ./log-file.txt
+    else
+      echo "'$3' is not a valid argument for 'show'"
+      set_highest_accepted_arg $#
+    fi
+  elif [[ $# < 3 ]]; then
     set_highest_accepted_arg 2
     create_log_entry "$2"
   fi
@@ -146,7 +167,7 @@ pull () {
 
 display_help () {
   if [[ "$1" == "verbose" ]]; then
-    echo "I didn't understand '$args' ...Did you mean any of these?"
+    echo "I didn't fully understand '$args' ...Did you mean any of these?"
     #if argument is not no-wordmark
   elif [[ "$1" != "no-wordmark" ]]; then
     $helper display_word_mark
@@ -188,6 +209,8 @@ display_help () {
 
 go () {
   cd $EKA
+  clear
+  $helper display_word_mark
   echo ""
   echo "You are now in the eka repo"
 }
@@ -198,19 +221,19 @@ actions=()
 options=()
 
 labels+=("log")
-descriptions+=("Create a new entry in the log")
+descriptions+=("Create a new entry or show the log")
 actions+=(log)
-options+=("'<message>'")
+options+=("'<message>' 'show' ['last' ['<number of lines> (0=last entry)']")
 
 labels+=("sync")
 descriptions+=("Sync local config into repo (will extract sensitive data into .git-credentials)")
 actions+=(sync)
-options+=("'up', 'down', 'push <message>', 'pull'")
+options+=("'up' 'down' 'push <message>' 'pull'")
 
 labels+=("push")
 descriptions+=("Create log entry etc, then push changes to GitHub")
 actions+=(push)
-options+=("'<message>', 'sync'")
+options+=("'<message>' 'sync'")
 
 labels+=("pull")
 descriptions+=("Pull changes from GitHub")
@@ -227,6 +250,7 @@ fi
 number_of_arguments="$#"
 highest_accepted_argument=0
 origin_path=$PWD
+args="$@"
 
 if [[ $EKA == "" ]]; then
   helper=$PWD/helpers.sh
@@ -252,7 +276,11 @@ else
     echo "|      eka is already initialised     |"
     echo "'-------------------------------------'"
   else
-    if [[ "$(detect_git_conflict)" == "1" ]]; then
+    git_actions=("push" "pull")
+    detect_git_conflict
+    has_conflict=$?
+
+    if [[  $has_conflict == 1 && " ${git_actions[@]} " =~ " $1 "  ]]; then
       echo "You seem to have a conflict with remote"
     else 
       for (( i=0; i<${#labels[@]}; i++ )); do
@@ -265,10 +293,12 @@ else
       done
 
       if [[ $highest_accepted_argument == 0 ]]; then
-        # if no action was invoked, check if help was requested
         help_flags=("-h" "--help" "help")
-
-        if [[ " ${help_flags[@]} " =~ " $1 " ]]; then
+        
+        if [[ "$1" == "go" && "$PWD" == "$EKA" ]]; then
+          echo ""
+          echo "You are already in the eka repo"
+        elif [[ " ${help_flags[@]} " =~ " $1 " ]]; then
           display_help
         else
           display_help verbose
