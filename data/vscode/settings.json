@@ -42,7 +42,8 @@
     "merge.incomingHeaderBackground": "#AAFFFF01",
     "editorOverviewRuler.commonContentForeground": "#00FFFF99",
     "editorOverviewRuler.currentContentForeground": "#00DDAA",
-    "editorOverviewRuler.incomingContentForeground": "#00AADD"
+    "editorOverviewRuler.incomingContentForeground": "#00AADD",
+    "scrollbar.shadow": "#00AADD22"
   },
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -148,5 +149,8 @@
     "plaintext": false,
     "markdown": false,
     "vue": false
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
   },
 }

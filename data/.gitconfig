@@ -1,6 +1,7 @@
 [core]
 	editor = vim
 [alias]
+	new = whats
 	co = checkout
 	br = branch
 	ci = commit
