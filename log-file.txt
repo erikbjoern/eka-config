@@ -269,3 +269,8 @@ fix whitespace Fri Sep 16 20:32:20 CEST 2022
  data/.bash_profile | 8 --------
  helpers.sh         | 7 +++++--
  2 files changed, 5 insertions(+), 10 deletions(-)
+
+test? Fri Sep 16 20:42:05 CEST 2022
+ data/.bash_profile | 1 -
+ helpers.sh         | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)

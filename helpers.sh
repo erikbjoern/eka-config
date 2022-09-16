@@ -130,8 +130,8 @@ set_local_config() {
   # trim all trailing newlines from $HOME/.bash_profile
   sed -i '' -e :a -e '/^\n*$/{$d;N;};/\n$/ba' $HOME/.bash_profile
 
+  echo "" >>$HOME/.bash_profile
   echo "export EKA=$(cat $EKA/local/eka-path.txt)" >>$HOME/.bash_profile
-  echo "" >>$EKA/data/.bash_profile
 }
 
 store_git_credentials_in_repo() {

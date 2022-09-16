@@ -77,4 +77,3 @@ git_current_branch() {
 }
 
 eka () { . $EKA/scripts.sh ;}
-
