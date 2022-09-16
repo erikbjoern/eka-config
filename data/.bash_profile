@@ -45,35 +45,35 @@ alias migrate-up='grep ^DATABASE_URL .env && db-migrate up --check && confirm &&
 alias kcluster='kubectl config get-contexts | fzf | tr -s " " | cut -d" " -f2 | xargs kubectl config use-context'
 alias kns='kubectl get ns | fzf | cut -d" " -f1 | xargs kubectl config set-context --current --namespace'
 
-new_file () {
+new_file() {
   touch $1
   code $1
 }
 
-confirm () {
+confirm() {
   read -p "Do you want to proceed? (y/n) " yn
 
-  case $yn in 
-    y ) echo ok, we will proceed;;
-    n ) echo exiting...;
-      exit 0;;
-    * ) echo invalid response;
-      exit 0;;
+  case $yn in
+  y) echo ok, we will proceed ;;
+  n)
+    echo exiting...
+    exit 0
+    ;;
+  *)
+    echo invalid response
+    exit 0
+    ;;
   esac
 
   echo doing stuff...
 }
 
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$*" ;}
+code() { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args "$*"; }
 
 [ -f $HOME/.fzf.bash ] && source $HOME/.fzf.bash
 
-git_current_branch () {
-	cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
+git_current_branch() {
+  cat "$(git rev-parse --git-dir 2>/dev/null)/HEAD" | gsed -e 's/^.*refs\/heads\///'
 }
 
-
-
-export EKA="/Users/erikbjorn/eka-config"
-eka () { . $EKA/scripts.sh ;}
-
+eka() { . $EKA/scripts.sh; }

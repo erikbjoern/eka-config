@@ -249,3 +249,11 @@ auto-push Fri Sep 16 18:58:55 CEST 2022
  data/.gitconfig           | 1 +
  data/vscode/settings.json | 6 +++++-
  2 files changed, 6 insertions(+), 1 deletion(-)
+
+adjustments, trying to improve usage from different machines/users Fri Sep 16 19:50:00 CEST 2022
+ .gitignore         |  2 ++
+ data/.bash_profile | 32 +++++++++++------------
+ helpers.sh         | 74 ++++++++++++++++++++++++++++--------------------------
+ package.json       |  4 +--
+ scripts.sh         | 57 +++++++++++++++++++++--------------------
+ 5 files changed, 87 insertions(+), 82 deletions(-)
