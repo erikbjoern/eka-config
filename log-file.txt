@@ -284,3 +284,7 @@ set default git credentials in init script Fri Sep 16 21:08:29 CEST 2022
 improve 'go' command Mon Sep 19 21:04:11 CEST 2022
  scripts.sh | 47 +++++++++++++++++++++++++++++++++--------------
  1 file changed, 33 insertions(+), 14 deletions(-)
+
+minor adjustment to 'go' command Mon Sep 19 21:07:58 CEST 2022
+ scripts.sh | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)

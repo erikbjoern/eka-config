@@ -207,27 +207,26 @@ display_help() {
 
 go() {
   cd $EKA
-
   echo ""
 
   if [[ "$2" == "show" ]]; then
     set_highest_accepted_arg 2
-    
     ls -d ../*/
-
     cd $OLDPWD
   elif [[ "$2" != "" && -d "../$2" ]]; then
     set_highest_accepted_arg 2
-
     cd "../$2"
-    echo "You are now in $2"
+    clear
+    echo "You are now in: $2"
   elif [[ "$2" == "" ]]; then
     clear
     $helper display_word_mark
+    echo ""
     echo "You are now in the eka repo"
   else 
     set_highest_accepted_arg 2
     echo "$2 is not a project. Use 'show' to list all available projects"
+    cd $OLDPWD
   fi
 }
 
