@@ -207,10 +207,28 @@ display_help() {
 
 go() {
   cd $EKA
-  clear
-  $helper display_word_mark
+
   echo ""
-  echo "You are now in the eka repo"
+
+  if [[ "$2" == "show" ]]; then
+    set_highest_accepted_arg 2
+    
+    ls -d ../*/
+
+    cd $OLDPWD
+  elif [[ "$2" != "" && -d "../$2" ]]; then
+    set_highest_accepted_arg 2
+
+    cd "../$2"
+    echo "You are now in $2"
+  elif [[ "$2" == "" ]]; then
+    clear
+    $helper display_word_mark
+    echo "You are now in the eka repo"
+  else 
+    set_highest_accepted_arg 2
+    echo "$2 is not a project. Use 'show' to list all available projects"
+  fi
 }
 
 labels=()
@@ -221,7 +239,7 @@ options=()
 labels+=("log")
 descriptions+=("Create a new entry or show the log")
 actions+=(log)
-options+=("'<message>' 'show' ['last' ['<number of lines> (0=last entry)']")
+options+=("'<message>' 'show' ['last' ['<number of lines> (''=last entry)']")
 
 labels+=("sync")
 descriptions+=("Sync local config into repo (will extract sensitive data into .git-credentials)")
@@ -238,12 +256,10 @@ descriptions+=("Pull changes from GitHub")
 actions+=(pull)
 options+=("'sync'")
 
-if [[ $PWD != $EKA ]]; then
-  labels+=("go")
-  descriptions+=("Go to the eka repo directory")
-  actions+=(go)
-  options+=("")
-fi
+labels+=("go")
+descriptions+=("Go to the eka repo directory, or any of its siblings")
+actions+=(go)
+options+=("'show' '<name of sibling directory>'")
 
 number_of_arguments="$#"
 highest_accepted_argument=0
@@ -274,10 +290,13 @@ else
     echo "'-------------------------------------'"
   else
     git_actions=("push" "pull")
-    detect_git_conflict
-    has_conflict=$?
 
-    if [[ $has_conflict == 1 && " ${git_actions[@]} " =~ " $1 " ]]; then
+    if [[ " ${git_actions[@]} " =~ " $1 " ]]; then
+      detect_git_conflict
+    fi
+
+    has_conflict=$?
+    if [[ $has_conflict == 1 ]]; then
       echo "You seem to have a conflict with remote"
     else
       for ((i = 0; i < ${#labels[@]}; i++)); do
@@ -292,7 +311,7 @@ else
       if [[ $highest_accepted_argument == 0 ]]; then
         help_flags=("-h" "--help" "help")
 
-        if [[ "$1" == "go" && "$PWD" == "$EKA" ]]; then
+        if [[ "$1" == "go" && "$PWD" == "$EKA" && "$2" == "" ]]; then
           echo ""
           echo "You are already in the eka repo"
         elif [[ " ${help_flags[@]} " =~ " $1 " ]]; then

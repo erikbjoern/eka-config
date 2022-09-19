@@ -280,3 +280,7 @@ set default git credentials in init script Fri Sep 16 21:08:29 CEST 2022
  package.json | 2 +-
  readme.md    | 2 +-
  3 files changed, 2 insertions(+), 5 deletions(-)
+
+improve 'go' command Mon Sep 19 21:04:11 CEST 2022
+ scripts.sh | 47 +++++++++++++++++++++++++++++++++--------------
+ 1 file changed, 33 insertions(+), 14 deletions(-)
