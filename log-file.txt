@@ -288,3 +288,8 @@ improve 'go' command Mon Sep 19 21:04:11 CEST 2022
 minor adjustment to 'go' command Mon Sep 19 21:07:58 CEST 2022
  scripts.sh | 9 ++++-----
  1 file changed, 4 insertions(+), 5 deletions(-)
+
+add fig and update better touch tool Sun Sep 25 12:52:55 CEST 2022
+ data/.bash_profile        |   8 +-
+ data/vscode/settings.json | 188 +++++++++++++++++++++++-----------------------
+ 2 files changed, 99 insertions(+), 97 deletions(-)
