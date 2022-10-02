@@ -65,9 +65,9 @@ detect_git_conflict() {
   return 0
 }
 
-push_eka_config() {
+push_to_github() {
   commitmessage=$@
-  echo "Triggering eka-config push to github"
+  echo "Triggering push to github in: $PWD"
 
   if [[ "$commitmessage" == "" ]]; then
     commitmessage="auto-push"
@@ -82,10 +82,10 @@ push_eka_config() {
   fi
 }
 
-pull_eka_config() {
+pull_from_github() {
   # if any changes on remote, pull them
   if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
-    echo "Pulling eka-config from github"
+    echo "Pulling from github in: $PWD"
     git pull
   else
     echo "No changes on remote"
@@ -95,7 +95,7 @@ pull_eka_config() {
 log() {
   if [[ "$2" == "show" ]]; then
     set_highest_accepted_arg 2
-    
+
     if [[ ! -f ./log-file.txt ]]; then
       echo "No log-file.txt found"
       return
@@ -128,10 +128,10 @@ sync() {
   elif [[ "$2" == "push" ]]; then
     set_highest_accepted_arg 3
     sync_config_from_home_into_repo
-    push_eka_config "$3"
+    push_to_github "$3"
   elif [[ "$2" == "pull" ]]; then
     set_highest_accepted_arg 2
-    pull_eka_config
+    pull_from_github
     sync_config_from_repo_into_home
   else
     set_highest_accepted_arg 2
@@ -144,22 +144,28 @@ push() {
   if [[ "$2" == "sync" ]]; then
     set_highest_accepted_arg 3
     sync_config_from_home_into_repo
-    push_eka_config "$3"
+    push_to_github "$3"
+  elif [[ "$2" != "" && -d $EKA/../$2 ]]; then
+    set_highest_accepted_arg 3
+    push_to_github "$3"
   elif [[ $number_of_arguments == 2 ]]; then
     set_highest_accepted_arg 2
-    push_eka_config "$2"
+    push_to_github "$2"
   elif [[ $number_of_arguments == 1 ]]; then
-    push_eka_config
+    push_to_github
   fi
 }
 
 pull() {
   if [[ "$2" == "sync" ]]; then
     set_highest_accepted_arg 2
-    pull_eka_config
+    pull_from_github
     $helper set_local_config
+  elif [[ "$2" != "" && -d $EKA/../$2 ]]; then
+    set_highest_accepted_arg 3
+    push_to_github "$3"
   elif [[ $# == 1 ]]; then
-    pull_eka_config
+    pull_from_github
   fi
 }
 
@@ -206,27 +212,25 @@ display_help() {
 }
 
 go() {
-  cd $EKA
   echo ""
 
   if [[ "$2" == "show" ]]; then
     set_highest_accepted_arg 2
-    ls -d ../*/
-    cd $OLDPWD
-  elif [[ "$2" != "" && -d "../$2" ]]; then
+    ls -d $EKA/../*/
+  elif [[ "$2" != "" && -d $EKA/../$2 ]]; then
     set_highest_accepted_arg 2
-    cd "../$2"
+    destination_path="$EKA/../$2"
     clear
     echo "You are now in: $2"
   elif [[ "$2" == "" ]]; then
+    destination_path="$EKA"
     clear
     $helper display_word_mark
     echo ""
     echo "You are now in the eka repo"
-  else 
+  else
     set_highest_accepted_arg 2
     echo "$2 is not a project. Use 'show' to list all available projects"
-    cd $OLDPWD
   fi
 }
 
@@ -262,7 +266,7 @@ options+=("'show' '<name of sibling directory>'")
 
 number_of_arguments="$#"
 highest_accepted_argument=0
-origin_path=$PWD
+destination_path="$PWD"
 args="$@"
 
 if [[ $EKA == "" ]]; then
@@ -291,6 +295,10 @@ else
     git_actions=("push" "pull")
 
     if [[ " ${git_actions[@]} " =~ " $1 " ]]; then
+      if [[ "$2" != "" && -d $EKA/../$2 ]]; then
+        cd $EKA/../$2
+      fi
+
       detect_git_conflict
     fi
 
@@ -323,6 +331,8 @@ else
       fi
     fi
   fi
+
+  cd "$destination_path"
 
   echo ""
 fi

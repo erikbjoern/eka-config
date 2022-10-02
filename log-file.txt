@@ -293,3 +293,5 @@ add fig and update better touch tool Sun Sep 25 12:52:55 CEST 2022
  data/.bash_profile        |   8 +-
  data/vscode/settings.json | 188 +++++++++++++++++++++++-----------------------
  2 files changed, 99 insertions(+), 97 deletions(-)
+
+improve script for push/pull, allow in any eka project Sun Oct 2 20:37:04 CEST 2022
