@@ -1,50 +1,48 @@
 {
-  "typescript.validate.enable": true,
-  "javascript.format.enable": true,
-  "eslint.format.enable": true,
-  "markdown.styles": [
-    ".vscode/markdown.css"
-  ],
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.expand": false,
-  "git.closeDiffOnOperation": true,
-  "editor.tabSize": 2,
-  "editor.fontSize": 14,
-  "typescript.autoClosingTags": false,
-  "auto-close-tag.disableOnLanguage": [
-    "typescript"
-  ],
-  "debug.javascript.autoAttachFilter": "onlyWithFlag",
-  "diffEditor.ignoreTrimWhitespace": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "workbench.editorAssociations": {
-    "git-rebase-todo": "default"
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[handlebars]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
   },
+  "[sql]": {
+    "editor.defaultFormatter": "i-dont-want-an-sql-formatter"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
   },
-  "terminal.integrated.fontFamily": "monospace",
-  "editor.tabCompletion": "on",
-  "editor.snippetSuggestions": "top",
-  "editor.fontFamily": "Source Code Pro",
-  "prettier.arrowParens": "avoid",
-  "html.format.endWithNewline": true,
-  "html.format.indentHandlebars": true,
-  "prettier.requireConfig": true,
-  "editor.formatOnSave": true,
+  "auto-close-tag.disableOnLanguage": [
+    "typescript"
+  ],
+  "css.validate": false,
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  "diffEditor.ignoreTrimWhitespace": false,
   "editor.bracketPairColorization.enabled": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.fontFamily": "Source Code Pro",
+  "editor.fontSize": 14,
+  "editor.formatOnSave": true,
   "editor.guides.bracketPairs": "active",
-  "workbench.colorCustomizations": {
-    "merge.currentHeaderBackground": "#AAFFFF01",
-    "merge.incomingHeaderBackground": "#AAFFFF01",
-    "editorOverviewRuler.commonContentForeground": "#00FFFF99",
-    "editorOverviewRuler.currentContentForeground": "#00DDAA",
-    "editorOverviewRuler.incomingContentForeground": "#00AADD",
-    "scrollbar.shadow": "#00AADD22"
-  },
+  "editor.inlineSuggest.enabled": true,
+  "editor.snippetSuggestions": "top",
+  "editor.stickyScroll.enabled": true,
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -92,6 +90,34 @@
       }
     ]
   },
+  "eslint.format.enable": true,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "git.closeDiffOnOperation": true,
+  "git.mergeEditor": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "vue": false
+  },
+  "html.format.endWithNewline": true,
+  "html.format.indentHandlebars": true,
+  "javascript.format.enable": true,
+  "markdown.preview.scrollEditorWithPreview": false,
+  "markdown.preview.scrollPreviewWithEditor": false,
+  "markdown.styles": [
+    ".vscode/markdown.css"
+  ],
+  "prettier.arrowParens": "avoid",
+  "prettier.requireConfig": true,
+  "scss.validate": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.automationProfile.osx": {
+    "path": "/bin/bash"
+  },
+  "terminal.integrated.fontFamily": "monospace",
   "todohighlight.isCaseSensitive": true,
   "todohighlight.keywords": [
     {
@@ -105,52 +131,22 @@
       "text": "WIP",
     },
   ],
-  "turboConsoleLog.wrapLogMessage": false,
-  "turboConsoleLog.logMessagePrefix": "",
-  "turboConsoleLog.addSemicolonInTheEnd": false,
-  "turboConsoleLog.insertEnclosingClass": true,
-  "turboConsoleLog.insertEnclosingFunction": true,
-  "turboConsoleLog.delimiterInsideMessage": ",",
-  "turboConsoleLog.includeFileNameAndLineNum": false,
-  "turboConsoleLog.quote": "\"",
-  "workbench.colorTheme": "Tokyo Night",
-  "markdown.preview.scrollEditorWithPreview": false,
-  "markdown.preview.scrollPreviewWithEditor": false,
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "terminal.integrated.automationProfile.osx": {
-    "path": "/bin/bash"
-  },
-  "[handlebars]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[sql]": {
-    "editor.defaultFormatter": "i-dont-want-an-sql-formatter"
-  },
-  "scss.validate": false,
-  "css.validate": false,
-  "editor.inlineSuggest.enabled": true,
+  "typescript.autoClosingTags": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "editor.stickyScroll.enabled": true,
-  "github.copilot.enable": {
-    "*": true,
-    "yaml": false,
-    "plaintext": false,
-    "markdown": false,
-    "vue": false
+  "typescript.validate.enable": true,
+  "workbench.colorCustomizations": {
+    "merge.currentHeaderBackground": "#AAFFFF01",
+    "merge.incomingHeaderBackground": "#AAFFFF01",
+    "editorOverviewRuler.commonContentForeground": "#00FFFF99",
+    "editorOverviewRuler.currentContentForeground": "#00DDAA",
+    "editorOverviewRuler.incomingContentForeground": "#00AADD",
+    "scrollbar.shadow": "#00AADD22"
   },
-  "[go]": {
-    "editor.defaultFormatter": "golang.go"
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.editorAssociations": {
+    "git-rebase-todo": "default"
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 }

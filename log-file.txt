@@ -301,3 +301,5 @@ auto-push Mon Oct 3 09:55:01 CEST 2022
  data/.gitconfig           |   2 +-
  data/vscode/settings.json | 188 +++++++++++++++++++++++-----------------------
  3 files changed, 99 insertions(+), 99 deletions(-)
+
+fix vscode settings Mon 3 Oct 2022 10:02:00 CEST
