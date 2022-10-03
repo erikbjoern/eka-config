@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/bash_profile.pre.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.pre.bash"
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
   GIT_PROMPT_ONLY_IN_REPO=1
@@ -19,7 +17,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # git aliases
 alias edit-bash="code $HOME/.bash_profile"
@@ -30,6 +28,7 @@ alias stash-u="git ci -m 'WIP' && git stash -u -m 'stash-unstaged' && git undo"
 alias stash-s="stash-u && git stash -m 'stash-staged' && git stash pop stash@{1}"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 alias save='git add . && git sv'
+alias m='git checkout master'
 
 # yarn project aliases
 alias yd="yarn dev"
@@ -80,6 +79,3 @@ git_current_branch() {
 
 eka () { . $EKA/scripts.sh ;}
 
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/bash_profile.post.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.post.bash"
