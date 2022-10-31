@@ -373,5 +373,21 @@
   {
     "key": "ctrl+shift+alt+tab",
     "command": "editor.action.inlineSuggest.showPrevious"
+  },
+  {
+    "key": "cmd+s",
+    "command": "workbench.action.files.saveWithoutFormatting"
+  },
+  {
+    "key": "cmd+k s",
+    "command": "-workbench.action.files.saveWithoutFormatting"
+  },
+  {
+    "key": "shift+alt+f",
+    "command": "workbench.action.files.save"
+  },
+  {
+    "key": "cmd+s",
+    "command": "-workbench.action.files.save"
   }
 ]

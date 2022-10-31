@@ -2,8 +2,15 @@
 	editor = vim
 [alias]
 	m = checkout master
+	main = checkout main
+	r = rebase
+	rom = rebase origin/master
+	romain = rebase origin/main
+	rc = rebase --continue
 	co = checkout
 	br = branch
+	del = branch -D
+	brf = for-each-ref --sort=-committerdate --count=5 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	ci = commit
 	st = status
 	fv = fetch -v

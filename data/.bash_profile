@@ -30,6 +30,47 @@ alias gpsup='git push --set-upstream origin $(git_current_branch)'
 alias save='git add . && git sv'
 alias m='git checkout master'
 
+gib() {
+  # get history of branches commited on, sort by latest commit date, find the latest one that is not the current branch
+  local branch=$(git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | grep -v $(git rev-parse --abbrev-ref HEAD) | head -n 1)
+
+  git switch $branch
+}
+
+gih() {
+  # get history of branches commited on, sort by latest commit date, find the one n steps back, even if it is the current branch
+  local branch=$(git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | head -n ${1:-1} | tail -n 1)
+
+  git switch $branch
+}
+
+print_branch_history() {
+  local mode="$1"
+  local flag="$2"
+  local count="${3:-10}"
+
+  echo "$flag"
+
+  # get branches, sort by commit date, list the $count latest
+  local branches=$(git branch $flag --sort=-committerdate | head -n $count)
+
+  echo "$mode branches:"
+  echo ""
+  echo "$branches" | awk '{gsub(/[\S\n]+/,"\n")}1'
+}
+
+gif() {
+  git switch $(git branch ${2:-"-l"} --sort=-committerdate | head -n ${1:-10} | awk '{gsub(/[\S\n]+/,"\n")}1' | fzf)
+}
+
+gihl() {
+  print_branch_history "Local" "-l" $1
+}
+
+gihlr() {
+  print_branch_history "Remote" "-r" $1
+}
+
 # yarn project aliases
 alias yd="yarn dev"
 alias yg="yarn generate"
@@ -79,3 +120,60 @@ git_current_branch() {
 
 eka () { . $EKA/scripts.sh ;}
 
+
+# function chooseTaskId () {
+#   taskname=$(jira list --gjq="issues" --query "$1" | jq ".[] | \"\(.key) \(.fields.summary)\"" --raw-output | fzf)
+#   if [ $? -ne 0 ]; then
+#     return $?
+#   fi
+#   taskId=$(echo $taskname | awk "{print \$1}")
+#   echo $taskId
+# }
+
+# #!/bin/bash
+
+# source ~/scripts/lib/choosejirataskid
+
+# query="resolution = unresolved and project = \"FEATURES\" ORDER BY priority asc, created"
+# chosenTask=$(chooseTaskId "$query")
+
+# if [ $? -ne 0 ]; then
+#   echo "Aborted. Exit code $?"
+#   exit $?
+# fi
+
+# echo $chosenTask
+# #!/bin/bash
+# url="https://voady.atlassian.net/browse/$(tjt)"
+# open $url
+# #!/bin/bash
+
+# source ~/scripts/lib/choosejirataskid
+
+# query="resolution = unresolved and assignee=currentuser() ORDER BY priority asc, created"
+# chosenTask=$(chooseTaskId "$query")
+
+# if [ $? -ne 0 ]; then
+#   echo "Aborted. Exit code $?"
+#   exit $?
+# fi
+
+# echo "Enter suffix of branch name, will be appended as <taskid>_<input>"
+# read branchName
+
+# git checkout -b "${chosenTask}_${branchName}"
+# #!/bin/bash
+# source ~/scripts/lib/choosejirataskid
+
+# query="resolution = unresolved and project = \"FEATURES\" ORDER BY priority asc, created"
+# chosenTask=$(chooseTaskId "$query")
+
+# if [ $? -ne 0 ]; then
+#   echo "Aborted. Exit code $?"
+#   exit $?
+# fi
+
+# echo "Enter suffix of branch name, will be appended as <taskid>_<input>"
+# read branchName
+
+# git cob "${chosenTask}_${branchName}"

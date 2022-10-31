@@ -100,7 +100,7 @@
     "yaml": false,
     "plaintext": false,
     "markdown": false,
-    "vue": false
+    "vue": true
   },
   "html.format.endWithNewline": true,
   "html.format.indentHandlebars": true,
@@ -149,4 +149,15 @@
   "[postcss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "editor.accessibilitySupport": "off",
+  "window.zoomLevel": 1,
 }

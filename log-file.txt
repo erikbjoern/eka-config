@@ -307,3 +307,11 @@ fix vscode settings Mon 3 Oct 2022 10:02:00 CEST
 BTT Mon Oct 31 23:01:32 CET 2022
  data/Default.bttpreset | 962 +++++++++++++++++++++++++------------------------
  1 file changed, 495 insertions(+), 467 deletions(-)
+
+auto-push Mon Oct 31 23:01:39 CET 2022
+ data/.bash_profile                                 | 98 ++++++++++++++++++++++
+ data/.gitconfig                                    |  7 ++
+ data/vscode/keybindings.json                       | 16 ++++
+ data/vscode/settings.json                          | 13 ++-
+ data/vscode/snippets/custom-snippets.code-snippets | 18 ++++
+ 5 files changed, 151 insertions(+), 1 deletion(-)
