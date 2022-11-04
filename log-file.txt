@@ -315,3 +315,8 @@ auto-push Mon Oct 31 23:01:39 CET 2022
  data/vscode/settings.json                          | 13 ++-
  data/vscode/snippets/custom-snippets.code-snippets | 18 ++++
  5 files changed, 151 insertions(+), 1 deletion(-)
+
+base-expandable Fri Nov 4 20:50:03 CET 2022
+ data/Default.bttpreset         | 886 +++++++++++++++++++++--------------------
+ other-files/BaseExpandable.vue | 231 +++++++++++
+ 2 files changed, 690 insertions(+), 427 deletions(-)
