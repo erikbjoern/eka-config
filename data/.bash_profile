@@ -87,6 +87,8 @@ alias migrate-up='grep ^DATABASE_URL .env && db-migrate up --check && confirm &&
 alias kcluster='kubectl config get-contexts | fzf | tr -s " " | cut -d" " -f2 | xargs kubectl config use-context'
 alias kns='kubectl get ns | fzf | cut -d" " -f1 | xargs kubectl config set-context --current --namespace'
 
+alias code-obsidian='code /Users/Shared/obsidian/obsidian-files/scripts'
+
 new_file() {
   touch $1
   code $1

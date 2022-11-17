@@ -320,3 +320,9 @@ base-expandable Fri Nov 4 20:50:03 CET 2022
  data/Default.bttpreset         | 886 +++++++++++++++++++++--------------------
  other-files/BaseExpandable.vue | 231 +++++++++++
  2 files changed, 690 insertions(+), 427 deletions(-)
+
+auto-push Thu Nov 17 20:37:17 CET 2022
+ data/.bash_profile | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+code-obsidian alias Thu Nov 17 20:38:07 CET 2022
