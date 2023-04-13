@@ -18,7 +18,7 @@
     "editor.defaultFormatter": "i-dont-want-an-sql-formatter"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -35,8 +35,6 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.fontFamily": "Source Code Pro",
-  "editor.fontSize": 14,
-  "editor.formatOnSave": true,
   "editor.guides.bracketPairs": "active",
   "editor.inlineSuggest.enabled": true,
   "editor.snippetSuggestions": "top",
@@ -68,8 +66,8 @@
         "scope": [
           "keyword.operator.logical.ts",
           "keyword.operator.logical.js",
-          "keyword.operator.ternary.ts",
           "keyword.operator.ternary.js",
+          "keyword.operator.ternary.ts",
           "keyword.control.flow.ts",
           "keyword.control.flow.js",
         ],
@@ -142,7 +140,6 @@
     "editorOverviewRuler.incomingContentForeground": "#00AADD",
     "scrollbar.shadow": "#00AADD22"
   },
-  "workbench.colorTheme": "Tokyo Night",
   "workbench.editorAssociations": {
     "git-rebase-todo": "default"
   },
@@ -159,5 +156,198 @@
     "FIG_NEW_SESSION": "1"
   },
   "editor.accessibilitySupport": "off",
-  "window.zoomLevel": 1,
+  "go.toolsManagement.autoUpdate": true,
+  "gitlens.views.commitDetails.files.layout": "tree",
+  "files.associations": {
+    "*.env": "properties"
+  },
+  "editor.minimap.enabled": false,
+  "workbench.colorTheme": "Tokyo Night",
+  "gitlens.views.branches.branches.layout": "list",
+  "terminal.integrated.defaultProfile.osx": "sh",
+  "zenMode.hideStatusBar": false,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "g", // go to
+        "o", // previous editing location
+      ],
+      "commands": [
+        "workbench.action.editor.previousChange"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g", // go to
+        "p", // next editing location
+      ],
+      "commands": [
+        "workbench.action.editor.nextChange"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "g", // go to
+        "m", // mark
+      ],
+      "after": [
+        "`"
+      ]
+    },
+    {
+      "before": [
+        "u"
+      ],
+      "commands": [
+        "undo"
+      ]
+    },
+    {
+      "before": [
+        "<C-r>",
+      ],
+      "commands": [
+        "redo"
+      ]
+    },
+    {
+      "before": [
+        "U",
+      ],
+      "commands": [
+        "redo"
+      ]
+    },
+    // {
+    //   "before": [
+    //     "d"
+    //   ],
+    //   "after": [
+    //     "\"",
+    //     "d",
+    //     "d"
+    //   ]
+    // },
+    // {
+    //   "before": [
+    //     "c"
+    //   ],
+    //   "after": [
+    //     "\"",
+    //     "c",
+    //     "c"
+    //   ]
+    // },
+    {
+      "before": [
+        "x"
+      ],
+      "after": [
+        "\"",
+        "x",
+        "x"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "f"
+      ],
+      "after": [
+        "y",
+        "i",
+        "w",
+        "/",
+        "<C-r>",
+        "\"",
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "F"
+      ],
+      "after": [
+        "y",
+        "i",
+        "w",
+        "/",
+        "<C-r>",
+        "\"",
+      ]
+    },
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<leader>",
+        "f"
+      ],
+      "after": [
+        "v",
+        "/",
+        "<C-r>",
+        "\"",
+      ]
+    },
+    // {
+    //   "before": [
+    //     "p"
+    //   ],
+    //   "commands": [
+    //     "editor.action.clipboardPasteAction"
+    //   ]
+    // },
+    // {
+    //   "before": [
+    //     "d"
+    //   ],
+    //   "after": [
+    //     "\"",
+    //     "d",
+    //     "d"
+    //   ]
+    // },
+    // {
+    //   "before": [
+    //     "c"
+    //   ],
+    //   "after": [
+    //     "\"",
+    //     "c",
+    //     "c"
+    //   ]
+    // },
+    {
+      "before": [
+        "x"
+      ],
+      "after": [
+        "\"",
+        "x",
+        "x"
+      ]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.easymotion": true,
+  "vim.history": 50,
+  "vim.showmodename": true,
+  "editor.fontSize": 15.625,
+  "terminal.integrated.fontSize": 12,
+  "editor.wordSeparators": "`~!@#$%^&*()-_=+[{]}\\|;:'\".<>/?,",
+  "git.openRepositoryInParentFolders": "always",
+  "[graphql]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "search.searchOnTypeDebouncePeriod": 500,
+  "[python]": {
+    "editor.formatOnType": true
+  },
 }

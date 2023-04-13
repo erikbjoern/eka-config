@@ -24,7 +24,7 @@ alias edit-bash="code $HOME/.bash_profile"
 alias source-bash="source $HOME/.bash_profile"
 alias edit-git="code $HOME/.gitconfig"
 alias diff="git diff > git.diff && code -r git.diff --wait && rm git.diff"
-alias stash-u="git ci -m 'WIP' && git stash -u -m 'stash-unstaged' && git undo"
+alias stash-u="git commit -m 'WIP' && git stash -u -m 'stash-unstaged' && git undo"
 alias stash-s="stash-u && git stash -m 'stash-staged' && git stash pop stash@{1}"
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
 alias save='git add . && git sv'
@@ -60,15 +60,47 @@ print_branch_history() {
 }
 
 gif() {
+  # fuzzy find branches, sort by latest commit date, find the latest one that is not the current branch
   git switch $(git branch ${2:-"-l"} --sort=-committerdate | head -n ${1:-10} | awk '{gsub(/[\S\n]+/,"\n")}1' | fzf)
 }
 
 gihl() {
+  # history list (of local branches)
   print_branch_history "Local" "-l" $1
 }
 
 gihlr() {
+  # history list of remote branches
   print_branch_history "Remote" "-r" $1
+}
+
+gibrclean() {
+  # delete all branches that have been merged into the current branch
+  git branch --merged | grep -v \* | xargs git branch -D
+}
+gibrdel() {
+  # delete all branches matching the given pattern
+  branches=$(git branch | grep -v \* | grep -E $1)
+  if [ -n "$branches" ]; then
+    echo "The following branches will be deleted:"
+    echo "$branches"
+    read -p "Are you sure you want to delete these branches? (y/n) " -n 1 confirm
+    echo
+    if [ "$confirm" = "y" ]; then
+      git branch -D $(echo "$branches")
+    fi
+  else
+    echo "No branches found matching the given pattern."
+  fi
+}
+
+gilc() {
+  # latest change of file
+  if [ "$2" = "--hash" ]; then
+    git log --follow --pretty=format:"%h" -- $1 | head -n 1
+  else
+    git log --follow --pretty=format:"%h %cd %s" --date=short -- $1 | grep -m ${2:-1} .
+  fi
 }
 
 # yarn project aliases
@@ -78,10 +110,10 @@ alias yyd="yarn && yarn dev"
 alias ytw="yarn test:watch"
 
 # db-migrate aliases
-alias db-check-down='grep ^DATABASE_URL .env &&  db-migrate down --check'
-alias db-check-up='grep ^DATABASE_URL .env && db-migrate up --check'
-alias migrate-down='grep ^DATABASE_URL .env && db-migrate down --check && confirm && db-migrate down'
-alias migrate-up='grep ^DATABASE_URL .env && db-migrate up --check && confirm && db-migrate up'
+alias db-check-down="grep -E '^\s*DATABASE_URL=' .env &&  db-migrate down --check"
+alias db-check-up="grep -E '^\s*DATABASE_URL=' .env && db-migrate up --check"
+alias migrate-down="grep -E '^\s*DATABASE_URL=' .env && db-migrate down --check && confirm && db-migrate down"
+alias migrate-up="grep -E '^\s*DATABASE_URL=' .env && db-migrate up --check && confirm && db-migrate up"
 
 # aws / kubernetes aliases
 alias kcluster='kubectl config get-contexts | fzf | tr -s " " | cut -d" " -f2 | xargs kubectl config use-context'
@@ -121,6 +153,13 @@ git_current_branch() {
 }
 
 eka () { . $EKA/scripts.sh ;}
+
+changelog() {
+  local PREVIOUS_VERSION=$1
+  local VERSION=$2
+  local CHANGES=$(git log --pretty="- %s" $PREVIOUS_VERSION...$VERSION --no-merges) 
+  printf "# 🎁 Release notes (\`$VERSION\`)\n\n## Changes\n$CHANGES\n\n## Metadata\n\`\`\`\nThis version -------- $VERSION\nPrevious version ---- $PREVIOUS_VERSION\nTotal commits ------- $(echo "$CHANGES" | wc -l)\n\`\`\`\n" > release_notes.md
+}
 
 
 # function chooseTaskId () {
@@ -179,3 +218,13 @@ eka () { . $EKA/scripts.sh ;}
 # read branchName
 
 # git cob "${chosenTask}_${branchName}"
+export NODE_AUTH_TOKEN=
+
+
+chrome-debug() {
+  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
+}
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="/usr/local/sbin:$PATH"

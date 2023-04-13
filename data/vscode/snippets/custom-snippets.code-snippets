@@ -29,22 +29,13 @@
     "prefix": "throw voadyError",
     "body": "throw voadyError(VoadyErrorType.${1:ErrorType})"
   },
-  "component-base": {
-    "prefix": "<template",
+  "Immediately Invoked Function Expression": {
+    "prefix": "iife",
     "body": [
-      "<template>",
-      "  <div>",
-      "    $0",
-      "  </div>",
-      "</template>",
-      "",
-      "<script lang=\"ts\">",
-      "export default {",
-      "  name: '${TM_FILENAME_BASE}',",
-      "}",
-      "</script>",
-      ""
+      "(() => {",
+      "\t$0",
+      "})()"
     ],
-    "description": ""
-  }
+    "description": "inserts an immediately invoked arrow function"
+  },
 }

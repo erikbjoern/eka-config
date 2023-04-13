@@ -1,28 +1,46 @@
 [core]
 	editor = vim
+	ignorecase = false
 [alias]
+	br = branch
+	brf = for-each-ref --sort=-committerdate --count=5 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+	ca = commit -am
+	ci = commit -m
+	cia = commit --amend
+	ciaa = commit --amend -a
+	co = checkout
+	cob = checkout -b
+	cp = cherry-pick
+	del = branch -D
+	f = fetch
+	fv = fetch -v
+	latest = diff HEAD^1 --stat
+	list = stash list
+	logo = log --oneline
 	m = checkout master
 	main = checkout main
-	r = rebase
-	rom = rebase origin/master
-	romain = rebase origin/main
-	rc = rebase --continue
-	co = checkout
-	br = branch
-	del = branch -D
-	brf = for-each-ref --sort=-committerdate --count=5 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-	ci = commit
-	st = status
-	fv = fetch -v
+	peek = stash show
+	pop = stash pop --index
 	pullup = pull --set-upstream
 	pushup = push --set-upstream
-	undo = reset --soft HEAD^1
-	pop = stash pop --index
-	logo = log --oneline
-	undo = reset --soft HEAD^1
+	r = rebase --reapply-cherry-picks
+	ra = rebase --abort
+	rc = rebase --continue
+	ri = rebase -i --reapply-cherry-picks
+	reveal = stash show -p
+	rom = rebase origin/master --reapply-cherry-picks
+	romain = rebase origin/main --reapply-cherry-picks
+	sh = stash -m
+	st = status
 	sv = stash -k -m "quick-save"
-	list = stash list
-	peek = stash show
+	undo = reset --soft HEAD^1
 	untrack = update-index --skip-worktree
 [pull]
 	rebase = false
+[safe]
+	directory = /Users/Shared/obsidian
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

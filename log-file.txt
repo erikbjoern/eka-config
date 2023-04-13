@@ -330,3 +330,11 @@ code-obsidian alias Thu Nov 17 20:38:07 CET 2022
 auto-push Mon Jan 9 21:27:24 CET 2023
  other-files/lego-bonsai.png | Bin 0 -> 2609249 bytes
  1 file changed, 0 insertions(+), 0 deletions(-)
+
+auto-push Thu Apr 13 13:45:20 CEST 2023
+ data/.bash_profile                                 |  59 ++-
+ data/.gitconfig                                    |  50 +-
+ data/vscode/keybindings.json                       | 516 ++++++++++++++++++++-
+ data/vscode/settings.json                          | 202 +++++++-
+ data/vscode/snippets/custom-snippets.code-snippets |  23 +-
+ 5 files changed, 798 insertions(+), 52 deletions(-)
