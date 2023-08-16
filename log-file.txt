@@ -344,3 +344,7 @@ auto-push Wed Aug 16 14:19:50 CEST 2023
  data/vscode/keybindings.json | 96 +++++++++++++++++++++++++++++++++++---------
  data/vscode/settings.json    | 47 +++++-----------------
  3 files changed, 99 insertions(+), 58 deletions(-)
+
+auto-push Wed Aug 16 14:32:08 CEST 2023
+ data/vscode/keybindings.json | 10 ----------
+ 1 file changed, 10 deletions(-)

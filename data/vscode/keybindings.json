@@ -926,16 +926,6 @@
   },
   {
     "key": "cmd+j",
-    "command": "search.action.focusNextSearchResult",
-    "when": "hasSearchResult || inSearchEditor"
-  },
-  {
-    "key": "cmd+k",
-    "command": "search.action.focusPreviousSearchResult",
-    "when": "hasSearchResult || inSearchEditor"
-  },
-  {
-    "key": "cmd+j",
     "command": "workbench.action.quickOpenSelectNext",
     "when": "inQuickOpen"
   },
