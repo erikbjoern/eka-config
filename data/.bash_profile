@@ -20,7 +20,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # git aliases
-alias edit-bash="code $HOME/.bash_profile"
+alias edit-bash="vim $HOME/.bash_profile"
 alias source-bash="source $HOME/.bash_profile"
 alias edit-git="code $HOME/.gitconfig"
 alias diff="git diff > git.diff && code -r git.diff --wait && rm git.diff"
@@ -224,7 +224,17 @@ export NODE_AUTH_TOKEN=
 chrome-debug() {
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
 }
+export PATH=$HOME/.local/bin:$PATH
+export PATH="/usr/local/sbin:$PATH"
+export GCP_DAI="/Users/erikbjorn/personal/gcp"
+
+function delete_last_lines() {
+    local num_lines="$1"
+    local file="$2"
+    sed -i.bak -e :a -e "$((num_lines+1)),\$d;N;2,3ba" -e 'P;D' "$file"
+}
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-export PATH="/usr/local/sbin:$PATH"
+
