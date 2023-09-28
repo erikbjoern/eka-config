@@ -561,7 +561,7 @@
   {
     "key": "j",
     "command": "list.focusDown",
-    "when": "listFocus || suggestWidgetVisible && !inputFocus"
+    "when": "listFocus && !inputFocus || suggestWidgetVisible && !inputFocus"
   },
   {
     "key": "j",
@@ -882,7 +882,7 @@
   {
     "key": "k",
     "command": "list.focusUp",
-    "when": "listFocus || suggestWidgetVisible && !inputFocus"
+    "when": "listFocus && !inputFocus"
   },
   {
     "key": "ctrl+p",
@@ -933,5 +933,50 @@
     "key": "cmd+k",
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "inQuickOpen"
+  },
+  {
+    "key": "cmd+j",
+    "command": "list.scrollDown",
+    "when": "listFocus && !inputFocus && listScrollAtBoundary != 'both' && listScrollAtBoundary != 'bottom'"
+  },
+  {
+    "key": "cmd+j",
+    "command": "list.select",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "cmd+j",
+    "command": "search.action.openResult",
+    "when": "fileMatchOrMatchFocus && searchViewletVisible"
+  },
+  {
+    "key": "cmd+j",
+    "command": "search.focus.nextInputBox",
+    "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
+  },
+  {
+    "key": "cmd+j",
+    "command": "widgetNavigation.focusNext",
+    "when": "inputFocus && navigableContainerFocused || navigableContainerFocused && !listFocus || navigableContainerFocused && listScrollAtBoundary == 'both' || navigableContainerFocused && listScrollAtBoundary == 'bottom'"
+  },
+  {
+    "key": "cmd+k",
+    "command": "list.scrollUp",
+    "when": "listFocus && !inputFocus && listScrollAtBoundary != 'both' && listScrollAtBoundary != 'top'"
+  },
+  {
+    "key": "cmd+k",
+    "command": "list.collapse",
+    "when": "listFocus && treeElementCanCollapse && !inputFocus || listFocus && treeElementHasParent && !inputFocus"
+  },
+  {
+    "key": "cmd+k",
+    "command": "search.focus.previousInputBox",
+    "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible && !searchInputBoxFocus"
+  },
+  {
+    "key": "cmd+k",
+    "command": "widgetNavigation.focusPrevious",
+    "when": "inputFocus && navigableContainerFocused || navigableContainerFocused && !listFocus || navigableContainerFocused && listScrollAtBoundary == 'both' || navigableContainerFocused && listScrollAtBoundary == 'top'"
   }
 ]

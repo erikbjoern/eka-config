@@ -102,6 +102,7 @@ gilc() {
     git log --follow --pretty=format:"%h %cd %s" --date=short -- $1 | grep -m ${2:-1} .
   fi
 }
+alias qd="./mvnw compile quarkus:dev"
 
 # yarn project aliases
 alias yd="yarn dev"
@@ -232,6 +233,11 @@ function delete_last_lines() {
     local num_lines="$1"
     local file="$2"
     sed -i.bak -e :a -e "$((num_lines+1)),\$d;N;2,3ba" -e 'P;D' "$file"
+}
+
+function prba() {
+  gh pr edit -b "$(git log --reverse --oneline --no-merges master..HEAD --pretty='- %s'
+)"
 }
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!

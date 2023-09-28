@@ -18,7 +18,7 @@
     "editor.defaultFormatter": "i-dont-want-an-sql-formatter"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -102,7 +102,6 @@
   },
   "html.format.endWithNewline": true,
   "html.format.indentHandlebars": true,
-  "javascript.format.enable": true,
   "markdown.preview.scrollEditorWithPreview": false,
   "markdown.preview.scrollPreviewWithEditor": false,
   "markdown.styles": [
@@ -258,12 +257,18 @@
   "vim.visualModeKeyBindingsNonRecursive": [
     {
       "before": [
-        "<leader>",
-        "f"
+        "S",
+        "<"
       ],
-      "commands": [
-        "editor.action.clipboardCopyAction",
-        "editor.action.find"
+      "after": [
+        "d",
+        "i",
+        "<",
+        ">",
+        "Esc",
+        "\"",
+        "+",
+        "P"
       ]
     },
     // {
@@ -325,4 +330,19 @@
   },
   "editor.cursorSurroundingLines": 999,
   "explorer.confirmDragAndDrop": false,
+  "[java]": {
+    "editor.defaultFormatter": "ilkka.google-java-format"
+  },
+  // "emeraldwalk.runonsave": {
+  //   "commands": [
+  //     {
+  //       "match": ".+\\.java",
+  //       "cmd": "google-java-format -r --set-exit-if-changed $(git diff --name-only | sed 's|.*voady-cash/src|./**|')"
+  //     },
+  //   ],
+  // },
+  "java.format.enabled": false,
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
 }
