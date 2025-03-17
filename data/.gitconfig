@@ -1,46 +1,72 @@
 [core]
-	editor = vim
-	ignorecase = false
+editor = vim
+ignorecase = false
+
 [alias]
-	br = branch
-	brf = for-each-ref --sort=-committerdate --count=5 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-	ca = commit -am
-	ci = commit -m
-	cia = commit --amend
-	ciaa = commit --amend -a
-	co = checkout
-	cob = checkout -b
-	cp = cherry-pick
-	del = branch -D
-	f = fetch
-	fv = fetch -v
-	latest = diff HEAD^1 --stat
-	list = stash list
-	logo = log --oneline
-	m = checkout master
-	main = checkout main
-	peek = stash show
-	pop = stash pop --index
-	pullup = pull --set-upstream
-	pushup = push --set-upstream
-	r = rebase --reapply-cherry-picks
-	ra = rebase --abort
-	rc = rebase --continue
-	ri = rebase -i --reapply-cherry-picks
-	reveal = stash show -p
-	rom = rebase origin/master --reapply-cherry-picks
-	romain = rebase origin/main --reapply-cherry-picks
-	sh = stash -m
-	st = status
-	sv = stash -k -m "quick-save"
-	undo = reset --soft HEAD^1
-	untrack = update-index --skip-worktree
+# branch
+br = branch
+brf = for-each-ref --sort=-committerdate --count=5 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+co = checkout
+cob = checkout -b
+# switch to main/master
+m = "!git fetch && git checkout $(git symbolic-ref refs/remotes/origin/HEAD --short | sed 's@origin/@@')"
+
+# commit
+ca = commit -am
+ci = commit -m
+cia = commit --amend
+# un-commit latest
+undo = reset HEAD^1
+
+# cherry-pick
+cp = cherry-pick
+cpa = cherry-pick --abort
+cpc = cherry-pick --continue
+#cherry-pick interactive
+cpi = "!f() { git log --cherry-pick --oneline --no-merges ${1}...$(git symbolic-ref refs/remotes/origin/HEAD --short | sed 's@origin/@@') | fzf -m | awk '{print $1}' | xargs git cherry-pick; }; f"
+
+# fetch
+f = fetch
+fv = fetch -v
+
+# diff & log
+diffm = "!git diff $(git symbolic-ref refs/remotes/origin/HEAD --short | sed 's@origin/@@')"
+latest = diff HEAD^1 --stat
+logo = log --oneline
+st = status
+compare = log --oneline --cherry HEAD
+
+# stash
+list = stash list
+peek = stash show
+pop = "!f() { git stash list | grep \"stash@{${1:-0}}\"; git stash pop --index ${1:-0}; }; f"
+reveal = stash show -p
+sh = stash
+sv = stash -k -m "quick-save"
+
+# rebase
+r = rebase --reapply-cherry-picks
+ra = rebase --abort
+rc = rebase --continue
+ri = rebase -i --reapply-cherry-picks
+rq = rebase --quit
+# rebase origin master
+rom = "!git rebase $(git symbolic-ref refs/remotes/origin/HEAD --short) --reapply-cherry-picks"
+# rebase interactive (origin) master
+rim = "!git rebase -i $(git symbolic-ref refs/remotes/origin/HEAD --short) --reapply-cherry-picks"
+
+# track/untrack file(s)
+track = update-index --no-skip-worktree
+untrack = update-index --skip-worktree
+
 [pull]
-	rebase = false
+rebase = true
+
 [safe]
-	directory = /Users/Shared/obsidian
+directory = /Users/Shared/obsidian
+
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true

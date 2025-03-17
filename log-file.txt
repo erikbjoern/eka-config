@@ -367,3 +367,11 @@ auto-push Mon Mar 17 11:31:30 CET 2025
  data/Default.bttpreset                             | 1772 +++++++++++---------
  data/apple-scripts/activate_spotify_or_idagio.scpt |  Bin 0 -> 2902 bytes
  2 files changed, 960 insertions(+), 812 deletions(-)
+
+auto-push Mon Mar 17 11:31:49 CET 2025
+ data/.bash_profile                                 | 188 ++++--
+ data/.gitconfig                                    | 108 ++--
+ data/vscode/keybindings.json                       | 638 +++++++++++++--------
+ data/vscode/settings.json                          | 354 +++++++++---
+ data/vscode/snippets/custom-snippets.code-snippets |  13 -
+ 5 files changed, 889 insertions(+), 412 deletions(-)

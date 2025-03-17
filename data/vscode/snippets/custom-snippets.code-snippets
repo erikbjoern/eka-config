@@ -25,17 +25,4 @@
     ],
     "description": "scaffolds a database script"
   },
-  "voadyError": {
-    "prefix": "throw voadyError",
-    "body": "throw voadyError(VoadyErrorType.${1:ErrorType})"
-  },
-  "Immediately Invoked Function Expression": {
-    "prefix": "iife",
-    "body": [
-      "(() => {",
-      "\t$0",
-      "})()"
-    ],
-    "description": "inserts an immediately invoked arrow function"
-  },
 }
