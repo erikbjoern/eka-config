@@ -362,3 +362,8 @@ auto-push Thu Sep 28 13:30:42 CEST 2023
 auto-push Sun Mar 17 16:25:49 CET 2024
  data/Default.bttpreset | 1606 ++++++++++++++++++++++++------------------------
  1 file changed, 817 insertions(+), 789 deletions(-)
+
+auto-push Mon Mar 17 11:31:30 CET 2025
+ data/Default.bttpreset                             | 1772 +++++++++++---------
+ data/apple-scripts/activate_spotify_or_idagio.scpt |  Bin 0 -> 2902 bytes
+ 2 files changed, 960 insertions(+), 812 deletions(-)
